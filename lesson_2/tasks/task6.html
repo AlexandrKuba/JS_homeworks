@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 6</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 6</h1>
+    <p>
+      З клавіатури вводяться вартість товару та кількість одиниць 3 товарів.
+      Обчислити вартість кожного товару окремо та загальну вартість. Вивести чек
+      (як у супермаркеті) використовуючи елементи розмітки.
+    </p>
+    <script>
+      // 1. Вводимо необхідні дані
+      const product1Cost = parseFloat(prompt("Введіть вартість товару 1", 17));
+      const product1Quantity = parseFloat(
+        prompt("Введіть кількість товару1", 2)
+      );
+      const product2Cost = parseFloat(
+        prompt("Введіть вартість товару 2", 35.5)
+      );
+      const product2Quantity = parseFloat(
+        prompt("Введіть кількість товару 2", 5)
+      );
+      const product3Cost = parseFloat(prompt("Введіть вартість товару 3", 28));
+      const product3Quantity = parseFloat(
+        prompt("Введіть кількість товару 3", 1)
+      );
+
+      // 2. Знаходимо результат
+      let product1TotalCost = product1Cost * product1Quantity;
+      let product2TotalCost = product2Cost * product2Quantity;
+      let product3TotalCost = product3Cost * product3Quantity;
+      let productTotalCost =
+        product1TotalCost + product2TotalCost + product3TotalCost;
+
+      // 3. Виводимо результат
+      document.write(
+        `<div style="border:2px solid #fff; width: 500px;">
+          <p style="text-align: center;">Чек</p>
+          <table style="width: 500px; border-collapse: collapse;">
+          <colgroup>
+    <col />
+    <col width="20%"/>
+  </colgroup>
+          <tr><td>${product1Quantity.toFixed(
+            3
+          )} *</td><td>${product1Cost.toFixed(
+          2
+        )}</td></tr> <tr><td>товар 1</td><td>${product1TotalCost.toFixed(
+          2
+        )}</td></tr><tr><td>${product2Quantity.toFixed(
+          3
+        )} *</td><td>${product2Cost.toFixed(
+          2
+        )}</td></tr> <tr><td>товар 2</td><td>${product2TotalCost.toFixed(
+          2
+        )}</td></tr>
+        <tr><td>${product3Quantity.toFixed(3)} *</td><td>${product3Cost.toFixed(
+          2
+        )}</td></tr> <tr style="border-bottom: 2px dashed #000;"><td>товар 3</td><td>${product3TotalCost.toFixed(
+          2
+        )}</td></tr><tr><td>Сума</td><td>${productTotalCost.toFixed(
+          2
+        )} грн</td></tr></table><p>Передбачення: цей день буде вдалим &#x1F604;</p></div>`
+      );
+    </script>
+  </body>
+</html>

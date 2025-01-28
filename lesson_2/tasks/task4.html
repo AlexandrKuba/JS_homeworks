@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>Дано довжину у сантиметрах. Визначати скільки це метрів і кілометрів.</p>
+    <script>
+      // 1. Вводимо необхідні дані
+      const lengthCentimetre = parseFloat(
+        prompt("Введіть довжину у сантиметрах", 100)
+      );
+      const metersInCentimetre = 0.01;
+      const kilometrsInCentimetre = 0.00001;
+      // 2. Знаходимо результат
+      const lengthMeters = lengthCentimetre * metersInCentimetre;
+      const lengthKilometrs = lengthCentimetre * kilometrsInCentimetre;
+      // 3. Виводимо результат
+      document.write(
+        `${lengthCentimetre} сантиметрів це ${lengthMeters} метр(ів), або ${lengthKilometrs.toFixed(
+          7
+        )} кілометр(ів)`
+      );
+    </script>
+  </body>
+</html>
