@@ -18,14 +18,11 @@
         prompt("Введіть кількість секунд, що пройшла від початку доби", 75)
       );
       const secondsPerMinutes = 60;
-      const minutesPerHours = 60;
       const secondsPerHours = 3600;
 
       // 2. Знаходимо результат
       let hours = Math.floor(seconds / secondsPerHours);
-      let minutes = Math.floor(
-        seconds / secondsPerMinutes - hours * minutesPerHours
-      );
+      let minutes = seconds % 60;
 
       // 3. Виводимо результат
       document.write(
