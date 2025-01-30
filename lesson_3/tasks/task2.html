@@ -31,7 +31,7 @@
           respond = "Нажаль, у вас не вистачає грошей на покупку";
         else
           respond =
-            difference > lotteryTicket
+            difference >= lotteryTicket
               ? "Бажаєте купити лотерею за 4 грн?"
               : `Якщо у вас ще є ${
                   lotteryTicket - difference
