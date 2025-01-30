@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>
+      З клавіатури вводяться імена двох дітей та кількість у них цукерок.
+      Вивести не екран ім’я тієї дитини, у якої кількість цукерок є більшою, або
+      вивести, що кількість однакова.
+    </p>
+    <script>
+      // 1. Вводимо необхідні дані
+      const child1Name = prompt("Введіть ім'я першоє дитини");
+      const child1Candys = parseInt(
+        prompt(`Скільки цукерок є у ${child1Name}`, 1)
+      );
+      const child2Name = prompt("Введіть ім'я другої дитини");
+      const child2Candys = parseInt(
+        prompt(`Скільки цукерок є у ${child2Name}`, 1)
+      );
+      let haveMoreCandys;
+      // 2. Знаходимо результат
+      if (child1Candys < 0 || child2Candys < 0)
+        respond = "У дітй не можубути від'ємна кількість цукерок";
+      else {
+        if (child1Candys > child2Candys) haveMoreCandys = child1Name;
+        else if (child1Candys < child2Candys) haveMoreCandys = child2Name;
+        else if (child1Candys === child2Candys)
+          haveMoreCandys = "Кількість цукерок однакова";
+        else haveMoreCandys = "Введено не коректні дані";
+      }
+      // 3. Виводимо результат
+      if (child1Candys !== child2Candys)
+        document.write(`Більше цукерок має ${haveMoreCandys}`);
+      else document.write(`${haveMoreCandys}`);
+    </script>
+  </body>
+</html>
