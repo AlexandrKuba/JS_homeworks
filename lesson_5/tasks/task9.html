@@ -22,7 +22,7 @@
         // 2. Знаходимо результат
         do {
           computerNumber =
-            userNumber - 10 + Math.floor(Math.random() * (userNumber + 10));
+            userNumber - 10 + Math.floor(Math.random() * 21); //щоб генерувалось число в межах +/- 10
           if (confirm(`Ваше число ${computerNumber}?`)) {
             if (userNumber === computerNumber) {
               liar = false;
