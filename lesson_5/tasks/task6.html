@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 6</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 6</h1>
+    <p>Вивести 3 таблиці (по 3 рядки і 3 стовпці у кожній)</p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        // 1. Вводимо необхідні дані
+        let number = 1;
+        let resultColumn = "";
+        let resultRow = "";
+        let resultTable = "";
+        // 2. Знаходимо результат
+
+        for (let table = 0; table < 3; table++) {
+          for (let row = 0; row < 3; row++) {
+            for (let column = 0; column < 3; column++) {
+              resultColumn += `<td style="border: 2px solid #000; width: 20px; text-align: center;">${number++}</td>`;
+            }
+            resultRow += `<tr>${resultColumn}</tr>`;
+            resultColumn = "";
+          }
+          resultTable += `<table style="border: 2px solid #000;">${resultRow}</table>`;
+          resultRow = "";
+          resultColumn = "";
+        }
+        // 3. Виводимо результат
+        document.write(
+          `<div style="display: flex; gap: 50px">${resultTable}</div>  `
+        );
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 16</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 16</h1>
+    <p>
+      Користувач поступово вводить прибуток магазину за кожен день протягом N
+      тижнів. Знайти загальну величину прибутку та вивести величину прибутку
+      протягом кожного окремого тижня.
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        // 1. Вводимо необхідні дані
+        const totalWeeks = prompt(
+          "Введітькількіть тижнів, за які будемо рахувати прибуток",
+          1
+        );
+        let numberOfWeek;
+        let numberOfDay;
+        let profitPerDay = 0;
+        let profitPerWeek = 0;
+        let profitTotal = 0;
+        // 2. Знаходимо результат
+        for (let numberOfWeek = 1; numberOfWeek <= totalWeeks; numberOfWeek++) {
+          for (let numberOfDay = 0; numberOfDay < 7; numberOfDay++) {
+            let day;
+            switch (numberOfDay) {
+              case 0:
+                day = "понеділок";
+                break;
+              case 1:
+                day = "вівторок";
+                break;
+              case 2:
+                day = "середу";
+                break;
+              case 3:
+                day = "четвер";
+                break;
+              case 4:
+                day = "п'ятницю";
+                break;
+              case 5:
+                day = "суботу";
+                break;
+              case 6:
+                day = "неділю";
+                break;
+            }
+            profitPerDay = parseFloat(
+              prompt(`Введіть прибуток за ${day} тижня ${numberOfWeek}`)
+            );
+            profitPerWeek += profitPerDay;
+          }
+          document.write(
+            `Прибуток за тиждень ${numberOfWeek} склав ${profitPerWeek.toFixed(
+              2
+            )} грн<br>`
+          );
+          profitTotal += profitPerWeek;
+        }
+        // 3. Виводимо результат
+        document.write(
+          `Загальний прибуток за ${totalWeeks} тижнів - ${profitTotal.toFixed(
+            2
+          )} грн`
+        );
+      }
+    </script>
+  </body>
+</html>

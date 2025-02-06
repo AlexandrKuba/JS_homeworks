@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 9</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 9</h1>
+    <p>
+      Користувач загадує число. Комп’ютер задає питання поки не вгадає число
+      користувача (використати confirm).
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        // 1. Вводимо необхідні дані
+        const userNumber = parseInt(prompt("Загадайте число", 12));
+        let computerNumber;
+        let liar = true;
+        let result = `Комп'ютер вгадав ваше число ${userNumber}, але ви не зізнались`;
+        // 2. Знаходимо результат
+        do {
+          computerNumber =
+            userNumber - 10 + Math.floor(Math.random() * (userNumber + 10));
+          if (confirm(`Ваше число ${computerNumber}?`)) {
+            if (userNumber === computerNumber) {
+              liar = false;
+              result = `Комп'ютер вгадав ваше число ${userNumber}`;
+              alert(`Ваше число вгадано`);
+            } else alert(`Так не чесно, комп'ютер ще не вгадав ваше число`);
+          }
+        } while (userNumber !== computerNumber);
+        if (liar)
+          alert(
+            `Комп'ютер вгадав ваше число ${userNumber}, але ви не зізнались`
+          );
+        // 3. Виводимо результат
+        document.write(`${result}`);
+      }
+    </script>
+  </body>
+</html>

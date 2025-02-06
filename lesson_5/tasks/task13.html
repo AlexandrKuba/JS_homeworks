@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 13</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 13</h1>
+    <p>
+      Морський бій. Комп’ютер випадково розташовує одиночний корабель на полі
+      розміром N*M. Маючи К снарядів користувач намагається потопити корабель.
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        // 1. Вводимо необхідні дані
+        let result;
+        let userShotX;
+        let userShotY;
+        const maxShots = parseInt(prompt("Укажіть кількість снарядів", 1));
+        const positionMaxX = parseInt(
+          prompt("Укажіть кількість рядків на полі", 2)
+        );
+        const positionMaxY = parseInt(
+          prompt("Укажіть кількість стовпців на полі", 2)
+        );
+        const shipPositionX = 1 + Math.floor(Math.random() * positionMaxX);
+        const shipPositionY = 1 + Math.floor(Math.random() * positionMaxY);
+
+        // 2. Знаходимо результат
+        for (let shot = 1; shot <= maxShots; shot++) {
+          userShotX = parseInt(prompt(`Постріл ${shot}. Вкажіть рядок`, 1));
+          userShotY = parseInt(prompt(`Постріл ${shot}. Вкажіть стовпчик`, 1));
+          if (userShotX == shipPositionX && userShotY == shipPositionY) {
+            result = `Пряме влучання, корабель потоплено`;
+            break;
+          } else {
+            alert("Ви не влучили");
+            result = `Нажаль, ви не влучили за ${maxShots} пострілів, корабель був у рядку №${shipPositionX} та стовпчику №${shipPositionY}`;
+          }
+        }
+
+        // 3. Виводимо результат
+        document.write(`${result}`);
+      }
+    </script>
+  </body>
+</html>

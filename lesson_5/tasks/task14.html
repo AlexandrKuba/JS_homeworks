@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 14</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 14</h1>
+    <p>
+      Каса. Користувачу повідомляють суму, яку йому треба сплатити. Користувач
+      поступово вводить суму грошей до тих пір, поки суми не буде достатньо для
+      оплати товарів (кожного разу користувачу повідомляють, яку ще суму
+      потрібно ввести).
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        // 1. Вводимо необхідні дані
+        const needToPay = 100 + Math.floor(Math.random() * (10000 - 101));
+        let payTotalUser = 0;
+        let paUser;
+        // 2. Знаходимо результат
+        do {
+          payUser = parseFloat(
+            prompt(
+              `Вам залишилось сплатити ${
+                needToPay - payTotalUser
+              } грн. Ввдіть ваш поточний деопзит`
+            )
+          );
+          payTotalUser += payUser;
+        } while (payTotalUser < needToPay);
+        // 3. Виводимо результат
+        if (payTotalUser === needToPay)
+          document.write(`Дякую, ви сплатили всю суму`);
+        else
+          document.write(
+            `Дякую, ви сплатили всю суму, ваша решта - ${(
+              payTotalUser - needToPay
+            ).toFixed(2)} грн`
+          );
+      }
+    </script>
+  </body>
+</html>
