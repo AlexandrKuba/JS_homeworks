@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 6</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 6</h1>
+    <p>
+      Створити функцію, яка створює таблицю з вказаною кількістю рядків і
+      стовпців (таблиця заповнюється заданим фіксованим повідомленням).
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        function getColBuild(num) {
+          let result = "";
+          for (let column = 0; column < num; column++) {
+            result += `<td style="border: 2px solid #000; text-align: center;">${message}</td>`;
+          }
+          return result;
+        }
+        function getRowBuild(num, col) {
+          let result = "";
+          for (let row = 0; row < num; row++) {
+            result += `<tr>${col}</tr>`;
+          }
+          return result;
+        }
+        function getTable(message, row = 8, column = 7) {
+          let result;
+          let resultColumn = getColBuild(column);
+          let resultRow = getRowBuild(row, resultColumn);
+          return (result = `<table style="border: 2px solid #000;">${resultRow}</table>`);
+        }
+        message = prompt("Напишітьщо виводити у комірки", "Функції");
+        document.write(getTable(message));
+      }
+    </script>
+  </body>
+</html>

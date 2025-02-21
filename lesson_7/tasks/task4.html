@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Створити функцію, яка для 3 заданих чисел знаходить одночасно декілька
+      результатів: кількість парних, кількість додатних, кількість більших за
+      100.
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        let quantityOfEven = 0;
+        let quantityOfPositiveNumbers = 0;
+        let quantityOfNumbersMore100 = 0;
+        // Знаходимо парні числа
+        function isEven(num) {
+          return num % 2 === 0;
+        }
+        //Знаходимо додатні числа
+        function isPositiveNumbers(num) {
+          return num > 0;
+        }
+        //Знаходимо числа більші за 100
+        function isNumbersMore100(num) {
+          return num > 100;
+        }
+        //функція для розрахунку кожного числа
+        function resultOfNumber(num) {
+          if (isEven(num)) quantityOfEven++;
+          if (isPositiveNumbers(num)) quantityOfPositiveNumbers++;
+          if (isNumbersMore100(num)) quantityOfNumbersMore100++;
+          return (
+            quantityOfEven, quantityOfPositiveNumbers, quantityOfNumbersMore100
+          );
+        }
+        //Загальна функція
+        function resultOf3Numbers(num1 = -2, num2 = 105, num3 = 8) {
+          resultOfNumber(num1);
+          resultOfNumber(num2);
+          resultOfNumber(num3);
+          return (
+            quantityOfEven, quantityOfPositiveNumbers, quantityOfNumbersMore100
+          );
+        }
+        resultOf3Numbers();
+        document.write(
+          `Парних чисел - ${quantityOfEven}<br>Додатніх чисел - ${quantityOfPositiveNumbers}<br>Чисел більше за 100 - ${quantityOfNumbersMore100}`
+        );
+      }
+    </script>
+  </body>
+</html>

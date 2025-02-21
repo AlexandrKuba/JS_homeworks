@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 5</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 5</h1>
+    <p>Створити окремі функції, які переводять:</p>
+    <ul>
+      <li>Сантиметри у дюйми;</li>
+      <li>Кілограми у фунти;</li>
+      <li>Кілометри у милі.</li>
+    </ul>
+    <script>
+      if (confirm("Почати тестування?")) {
+        //Сантиметри у дюйми
+        function getCentimetersToInches(num) {
+          const CENTIMETRININCHE = 2.54;
+          return num / CENTIMETRININCHE;
+        }
+        //Кілограми у фунти
+        function getKilogramsToPounds(num) {
+          const POUNDINKILOGRAM = 2.205;
+          return num * POUNDINKILOGRAM;
+        }
+        //Кілометри у милі
+        function getKilometersToMiles(num) {
+          const KILOMETRINMILE = 1.609;
+          return num / KILOMETRINMILE;
+        }
+        document.write(getCentimetersToInches(5).toFixed(3));
+      }
+    </script>
+  </body>
+</html>

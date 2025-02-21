@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 7</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 7</h1>
+    <p>
+      Створити функцію, яка випадковим чином виводить на екран одне із 4
+      зображень (шляхи до зображень передаються у функцію)
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const img1 = "./img/1.jpg";
+        const img2 = "./img/2.jpg";
+        const img3 = "./img/3.jpg";
+        const img4 = "./img/4.jpg";
+
+        function insertImg(img1, img2, img3, img4) {
+          const imgRandom = 1 + Math.floor(Math.random() * 4);
+          let result;
+          let resultImg;
+          switch (imgRandom) {
+            case 1:
+              resultImg = img1;
+              break;
+            case 2:
+              resultImg = img2;
+              break;
+            case 3:
+              resultImg = img3;
+              break;
+            case 4:
+              resultImg = img4;
+              break;
+          }
+          return (result = `<img src="${resultImg}" alt="F1">`);
+        }
+
+        document.write(insertImg(img1, img2, img3, img4));
+      }
+    </script>
+  </body>
+</html>

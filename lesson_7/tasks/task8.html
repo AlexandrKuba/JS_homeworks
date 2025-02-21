@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 7</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 8</h1>
+    <p>
+      Створити функцію, яка виводить банер (у функцію передаються: зображення,
+      заголовок та посилання, куди переходимо при кліку на зображення) (тег img
+      повине знаходитись у середині тега a: &lt;a&gt; &lt;img src=”шлях”&gt;
+      &lt;/a&gt;)
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const imgBanner = "./img/bukovel.jpg";
+        const linkBanner = "https://bukovel24.com/";
+        const titleBanner = "Відпочинок в Bukovel";
+        function getBanner(img, title, link) {
+          return (result = `<a href="${link}"><h1>${title}</h1><img src="${img}" alt="F1"></a>`);
+        }
+        document.write(getBanner(imgBanner, titleBanner, linkBanner));
+      }
+    </script>
+  </body>
+</html>
