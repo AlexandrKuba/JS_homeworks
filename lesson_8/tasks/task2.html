@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>
+      Дано масив, який зберігає кількість відвідувачів магазину протягом тижня.
+      Вивести на екран:
+    </p>
+    <ul>
+      <li>
+        ● номери днів, протягом яких кількість відвідувачів була меншою за 20;
+      </li>
+      <li>● номери днів, коли кількість відвідувачів була мінімальною;</li>
+      <li>● номери днів, коли кількість відвідувачів була максимальною;</li>
+      <li>
+        ● загальну кількість клієнтів у робочі дні та окремо загальну кількість
+        днів на вихідних.
+      </li>
+    </ul>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const arrVisitorsNumberPerDay = new Array();
+        for (let i = 0; i < 7; i++) {
+          arrVisitorsNumberPerDay.push(10 + Math.floor(Math.random() * 91)); //від 10 до 100 відвідувачів щодня
+        }
+        // функція, де визначаємо дні, в яких було меньше 20 відвідувачів
+        function getDaysWhenMax19Visitors(visitors) {
+          const daysWhenMax19Visitors = new Array();
+          for (let i = 0; i < visitors.length; i++) {
+            if (visitors[i] < 20) daysWhenMax19Visitors.push(i);
+          }
+          return daysWhenMax19Visitors;
+        }
+        // функція, коли кількість відвідувачів була мінімальною
+        function getDaysWhenMinVisitors(visitors) {
+          const daysWhenMinVisitors = new Array();
+          let minQuantityOfVisitors = visitors[0];
+          for (let i = 1; i < visitors.length; i++) {
+            if (visitors[i] < minQuantityOfVisitors)
+              minQuantityOfVisitors = visitors[i];
+          }
+          for (let i = 0; i < visitors.length; i++) {
+            if (visitors[i] === minQuantityOfVisitors)
+              daysWhenMinVisitors.push(i);
+          }
+          return daysWhenMinVisitors;
+        }
+        // функція, коли кількість відвідувачів була мінімальною
+        function getDaysWhenMaxVisitors(visitors) {
+          const daysWhenMaxVisitors = new Array();
+          let maxQuantityOfVisitors = visitors[0];
+          for (let i = 1; i < visitors.length; i++) {
+            if (visitors[i] > maxQuantityOfVisitors)
+              maxQuantityOfVisitors = visitors[i];
+          }
+          for (let i = 0; i < visitors.length; i++) {
+            if (visitors[i] === maxQuantityOfVisitors)
+              daysWhenMaxVisitors.push(i);
+          }
+          return daysWhenMaxVisitors;
+        }
+        //Функція підрахунку відвідувачів у робочі дні
+        function getTotalQuantityVisitorsInWorkDays(visitors) {
+          let totalQuantityVisitorsInWorkDays = 0;
+          for (let i = 0; i < 5; i++) {
+            totalQuantityVisitorsInWorkDays += visitors[i];
+          }
+          return totalQuantityVisitorsInWorkDays;
+        }
+        //Функція підрахунку відвідувачів у вихідні дні
+        function getTotalQuantityVisitorsInWeekendDays(visitors) {
+          let totalQuantityVisitorsInWeekendDays = 0;
+          for (let i = 5; i < 7; i++) {
+            totalQuantityVisitorsInWeekendDays += visitors[i];
+          }
+          return totalQuantityVisitorsInWeekendDays;
+        }
+        //Загальна функція
+        function getStatisticsOfVisitors(visitors) {
+          let daysWhenMax19Visitors = getDaysWhenMax19Visitors(visitors);
+          const daysWhenMinVisitors = getDaysWhenMinVisitors(visitors);
+          const daysWhenMaxVisitors = getDaysWhenMaxVisitors(visitors);
+          const totalQuantityVisitorsInWorkDays =
+            getTotalQuantityVisitorsInWorkDays(visitors);
+          const totalQuantityVisitorsInWeekendDays =
+            getTotalQuantityVisitorsInWeekendDays(visitors);
+          if (!daysWhenMax19Visitors[0])
+            daysWhenMax19Visitors = `У всі дні було більше 20 відвідувачів`;
+          else
+            daysWhenMax19Visitors =
+              `Дні, коли було менше 20 відвідувачів - ` + daysWhenMax19Visitors;
+          const result = `${daysWhenMax19Visitors}<br>День, або декалька, коли була мінімальна кількість відвідувачів - ${daysWhenMinVisitors}<br>День, або декалька, коли була максимальна кількість відвідувачів - ${daysWhenMaxVisitors}<br>Кількість відвідувачів у робочі дні - ${totalQuantityVisitorsInWorkDays}<br>Кількість відвідувачів у віхідні дні - ${totalQuantityVisitorsInWeekendDays}`;
+          return result;
+        }
+        document.write(getStatisticsOfVisitors(arrVisitorsNumberPerDay));
+      }
+    </script>
+  </body>
+</html>

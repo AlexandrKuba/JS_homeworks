@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 6</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 6</h1>
+    <p>
+      Дано послідовність цін товарів та назв (у окремих масивах). Вивести на
+      екран ті, які може собі дозволити користувач (кількість грошей задається).
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const productsPrices = [44, 405, 1.5, 35, 87, 160, 102, 55];
+        const productsNames = [
+          "Картопля",
+          "Ковбаса",
+          "Пакет",
+          "Молоко",
+          "Творог",
+          "Піца",
+          "Огірки мариновані",
+          "Шоколадка",
+        ];
+        const userMoney = parseFloat(
+          prompt("Введіть кількість грошей, яка у вас є", 70)
+        );
+        function getYouCanBuy(price, tovar, money) {
+          const youCanBuy = new Array();
+          for (let i = 0; i < productsPrices.length; i++) {
+            if (money > productsPrices[i]) {
+              let productToOffer = new Array();
+              productToOffer.push(tovar[i]);
+              productToOffer.push(price[i]);
+              // youCanBuy.push(productToOffer);
+              youCanBuy.push(` ${tovar[i]} - ${price[i]} грн`);
+            }
+          }
+          return youCanBuy;
+        }
+        document.write(
+          `Ви маєте ${userMoney} грн. На цю суму ви можете купити:<br>${getYouCanBuy(
+            productsPrices,
+            productsNames,
+            userMoney
+          )}`
+        );
+      }
+    </script>
+  </body>
+</html>

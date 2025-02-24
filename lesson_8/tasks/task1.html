@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>
+      Дано масив, який містить оцінки з К предметів. Знайти середній бал і
+      з’ясувати до якої категорії він відноситься (відмінник, двійочник (має
+      хоча би одну двійку), хорошист (оцінки добре і відмінно), трійочник(є хоча
+      би одна трійка)).
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const lessonQuantity = parseInt(prompt(`Введіть кількість предметів`));
+        const marks = [];
+        for (let i = 0; i < lessonQuantity; i++) {
+          marks.push(1 + Math.floor(Math.random() * 5));
+        }
+        // функція для середнього балу
+        function getAvgMark(marks) {
+          let totalMarks = 0;
+          for (let i = 0; i < marks.length; i++) {
+            totalMarks += marks[i];
+          }
+          return totalMarks / marks.length;
+        }
+        // функція для визначення категорії
+        function getCategoryStudent(marks) {
+          let minMark = marks[0];
+          let result;
+          for (let i = 1; i < marks.length; i++) {
+            if (marks[i] < minMark) minMark = marks[i];
+          }
+          switch (minMark) {
+            case 1:
+            case 2:
+              result = "Двійочник";
+              break;
+            case 3:
+              result = "Трійочник";
+              break;
+            case 4:
+              result = "Хорошист";
+              break;
+            case 5:
+              result = "Відмінник";
+              break;
+          }
+          return result;
+        }
+        //Загальна функція
+        function getDataStudent(marks) {
+          let result;
+          const avgMark = getAvgMark(marks);
+          const categoryStuden = getCategoryStudent(marks);
+          return (result = `Всього предметів у студента - ${
+            marks.length
+          }<br>Його оцінки - ${marks}<br>Середній бал - ${avgMark.toFixed(
+            1
+          )}<br>Категорія студента - ${categoryStuden}`);
+        }
+        document.write(getDataStudent(marks));
+      }
+    </script>
+  </body>
+</html>
