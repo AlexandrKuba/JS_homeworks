@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 8</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 8</h1>
+    <p>
+      Щоденно спортзал відвідує певна кількість людей. Користувач вводить такі
+      дані: скільки людей відвідало спортзал за день та вік кожного відвідувача.
+      Потрібно вивести вік найстаршого та наймолодшого відвідувачів, а також
+      середній вік всіх відвідувачів спортзалу за день.
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const visitorsNumber = parseInt(
+          prompt("Введіть кількість людей, які відвідали спортзал за день", 7)
+        );
+        let minAge = 0;
+        let maxAge = 0;
+        let totalAge = 0;
+        for (let i = 1; i <= visitorsNumber; i++) {
+          const visitorAge = parseInt(prompt(`Впишіть вік відвідувача ${i}`));
+          if (i === 1) {
+            minAge = visitorAge;
+            maxAge = visitorAge;
+            totalAge = visitorAge;
+          } else {
+            totalAge += visitorAge;
+            if (visitorAge < minAge) minAge = visitorAge;
+            if (visitorAge > maxAge) maxAge = visitorAge;
+          }
+        }
+        const avgAge = totalAge / visitorsNumber;
+        document.write(
+          `Кількість відвідувачів - ${visitorsNumber}<br>Мінімальний вік відвідувачів - ${minAge}<br>Максимальний вік відвідувачів - ${maxAge}<br>Середній вік відвідувачів - ${avgAge.toFixed()}`
+        );
+      }
+    </script>
+  </body>
+</html>
