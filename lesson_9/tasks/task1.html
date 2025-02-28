@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>
+      Користувач вводить кількість елементів. Створити масив, що складається з
+      вказаної кількості елементів заповнених нулями.
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const userNumber = parseInt(prompt("Ведіть кількість елементів"));
+        function getNewArrForUser(num) {
+          const userArr = new Array(num);
+          userArr.fill(0);
+          return userArr;
+        }
+        document.write(getNewArrForUser(userNumber));
+      }
+    </script>
+  </body>
+</html>

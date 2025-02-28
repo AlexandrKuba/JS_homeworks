@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 6</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 6</h1>
+    <p>
+      Дано масив елементів. Усі елементи, які більші за перший елемент помножити
+      на 2
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const arr = [17, 5, 12, 99, 36, 4, 62, 0, 55, 61];
+        document.write(`Масив до - ${arr}<br>`);
+        arr.forEach((element, index, arr) => {
+          if (element > arr[0]) {
+            arr[index] = element * 2;
+          }
+        });
+        document.write(`Масив після - ${arr}`);
+      }
+    </script>
+  </body>
+</html>

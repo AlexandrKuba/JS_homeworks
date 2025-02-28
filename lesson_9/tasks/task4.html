@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>Дано масив елементів. Вивести на екран елементи, що більші за 100</p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const arr = [100, 55, 119, 78, 1, 268, 1008, 99, 52];
+        function getNumbersLess100(num) {
+          for (const i of num) {
+            if (i > 100) document.write(`${i}<br>`);
+          }
+        }
+        getNumbersLess100(arr);
+      }
+    </script>
+  </body>
+</html>

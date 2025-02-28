@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 8</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 8</h1>
+    <p>
+      Дано масив номерів авто. Сформувати новий масив тих, які починаються на
+      «А»
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const arrCarsNumber = [
+          "АВ5285СІ",
+          "ВВ9625СХ",
+          "АС5324ММ",
+          "СІ4225РС",
+          "РК1237КЕ",
+          "СА6884ОТ",
+          "АА9634РР",
+        ];
+        document.write(`Масив всі номерів авто ${arrCarsNumber}<br>`);
+        const arrCarsNumberOnletterA = arrCarsNumber.filter(
+          (el) => el[0] === "А"
+        );
+        document.write(
+          `Масив номерів авто на літеру "А" ${arrCarsNumberOnletterA}<br>`
+        );
+      }
+    </script>
+  </body>
+</html>

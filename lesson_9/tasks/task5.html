@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 5</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 5</h1>
+    <p>Дано масив елементів. Знайти добуток додатних елементів</p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const arr = [-7, 12, 55, -5, 0, 36, -68, 84, 126, -96, 42];
+        function getSumOfNumbersLess0(num) {
+          let sumOfNumbers = 0;
+          for (const i of num) {
+            if (i > 0) sumOfNumbers += i;
+          }
+          return sumOfNumbers;
+        }
+        document.write(getSumOfNumbersLess0(arr));
+      }
+    </script>
+  </body>
+</html>

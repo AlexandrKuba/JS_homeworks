@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 9</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 9</h1>
+    <p>Дано масив імен. Сформувати масив з перших літер цих імен.</p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const arrNames = [
+          "Вася",
+          "Ольга",
+          "Сашко",
+          "Назар",
+          "Максим",
+          "Ірина",
+          "Петро",
+        ];
+        document.write(`Масив імен ${arrNames}<br>`);
+        const arrFirstLetterFromName = arrNames.map((el) => (el = el[0]));
+        document.write(`Масив першої літери з імені ${arrFirstLetterFromName}`);
+      }
+    </script>
+  </body>
+</html>
