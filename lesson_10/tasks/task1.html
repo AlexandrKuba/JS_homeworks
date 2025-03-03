@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>
+      Дано історію цін на цінні папери за деякий період (згенерувати від 1 до
+      10000). Сформувати новий масив, у якому є тільки ті, що більші за 1000
+      грн.
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const period = 10 + Math.floor(Math.random() * 31);
+        const arrPrices = [];
+        for (let i = 0; i < period; i++) {
+          arrPrices.push(1 + Math.floor(Math.random() * 10000));
+        }
+        document.write(`Початковий масив: ${arrPrices}<br>`);
+        const arrPriceMore1000 = arrPrices.filter((el) => el > 1000);
+        document.write(
+          `Масив, у якому цінибільше за 1000: ${arrPriceMore1000}`
+        );
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 8</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 8</h1>
+    <p>
+      Дано історію цін на цінні папери за деякий період (згенерувати від 1 до
+      10000). Підрахувати кількість цін, що більше за 1000
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const period = 10 + Math.floor(Math.random() * 31);
+        const arrPrices = [];
+        for (let i = 0; i < period; i++) {
+          arrPrices.push(1 + Math.floor(Math.random() * 10000));
+        }
+        document.write(`Початковий масив: ${arrPrices}<br>`);
+        const prisesMore1000 = arrPrices.reduce(
+          (prevNum, el) => (el > 1000 ? prevNum + 1 : prevNum),
+          0
+        );
+        document.write(`Кількість цін більша за 1000: ${prisesMore1000}`);
+      }
+    </script>
+  </body>
+</html>
