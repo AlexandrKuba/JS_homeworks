@@ -21,10 +21,16 @@
           arrPrices.push(1 + Math.floor(Math.random() * 10000));
         }
         document.write(`Початковий масив: ${arrPrices}<br>`);
-        const arrIndexOfPricesMore1000 = [];
-        arrPrices.filter((el, ind) => {
-          if (el > 1000) return arrIndexOfPricesMore1000.push(ind);
-        });
+        // Варіант 1
+        // const arrIndexOfPricesMore1000 = [];
+        // arrPrices.filter((el, ind) => {
+        //   if (el > 1000) return arrIndexOfPricesMore1000.push(ind);
+        // });
+        // Варіант 2
+        const arrIndexOfPricesMore1000 = arrPrices.reduce((newArr, el, ind) => {
+          if (el > 1000) newArr.push(ind);
+          return newArr;
+        }, []);
         document.write(
           `Номери цін, які більше за 1000: ${arrIndexOfPricesMore1000}`
         );
