@@ -20,11 +20,11 @@
           arrPrices.push(1 + Math.floor(Math.random() * 10000));
         }
         document.write(`Початковий масив: ${arrPrices}<br>`);
-        const isPricesMore1000 = arrPrices.some((el) => el < 1000);
-        const res = isPricesMore1000
-          ? "Є ціни менші за 1000"
-          : "Цін менше за 1000 немає";
-        document.write(res);
+        let isPricesLess1000;
+        arrPrices.some((el) => el < 1000)
+          ? (isPricesLess1000 = "Є ціни менші за 1000")
+          : (isPricesLess1000 = "Цін менше за 1000 немає");
+        document.write(isPricesLess1000);
       }
     </script>
   </body>
