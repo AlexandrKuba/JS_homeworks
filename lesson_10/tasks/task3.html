@@ -20,12 +20,9 @@
           arrPrices.push(1 + Math.floor(Math.random() * 10000));
         }
         document.write(`Початковий масив: ${arrPrices}<br>`);
-        const arrPriceMorePreviousPrice = arrPrices.filter((el, ind, arr) => {
-          let res;
-          if (ind === 0) res = el;
-          else res = el > arr[ind - 1];
-          return res;
-        });
+        const arrPriceMorePreviousPrice = arrPrices.filter(
+          (el, ind, arr) => ind != 0 && el > arr[ind - 1]
+        );
         document.write(
           `Масив, в якому тільки ті ціни, які більше за поереднє в початковому масиві: ${arrPriceMorePreviousPrice}`
         );
