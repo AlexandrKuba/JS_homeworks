@@ -32,13 +32,13 @@
             ships++;
           }
         }
-        document.write(`${JSON.stringify(field)}`);
+        document.write(`${JSON.stringify(field)}`); //Для перевірки влучання
         let numberOfShells = 6 + Math.floor(Math.random() * 5); //Кількість снарядів
         alert(`У вас є ${numberOfShells} пострілів, щоб потопити 6 кораблів`);
         while (ships != 0 && numberOfShells != 0) {
           const shotX = parseInt(prompt(`Вкажіть рядок пострілу`));
           const shotY = parseInt(prompt(`Вкажіть стовпчик пострілу`));
-          if (field[shotX][shotY])
+          if (field[shotX - 1][shotY - 1])
             alert(
               `Влучили! У вас залишилось ${--numberOfShells} пострілів, а на полі ${--ships} кораблів`
             );
