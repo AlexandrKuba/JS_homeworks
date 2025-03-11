@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>Дано інформацію про прибуток К магазинів протягом тижня. Знайти:</p>
+    <ul>
+      <li>1. загальний прибуток кожного магазину за тиждень;</li>
+      <li>
+        2. загальний прибуток усіх магазинів по дням (загальний прибуток усіх
+        магазинів за понеділок, за вівторок, і т.д.);
+      </li>
+      <li>3. загальний прибуток за робочі дні</li>
+      <li>4. загальний прибуток за вихідні дні</li>
+      <li>5. максимальний прибуток за середу</li>
+      <li>
+        6. сформувати загальний список (одновимірний масив) зі значенням, які що
+        більші за 200
+      </li>
+      <li>7. відсортувати кожен тиждень за зростанням</li>
+      <li>
+        8. відсортувати тижні (рядки) за спаданням максимального елементи у
+        цьому тижні (рядку), тобто при порівнянні рядків потрібно порівнювати
+        максимальні елементи у кожному з цих рядків
+      </li>
+      <li>
+        9. упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто
+        при порівнянні двох рядків треба знайти суму кожного з рядків і
+        порівнювати ці суми, на основі цих сум буде зрозуміло, який з елементів
+        повинен іти раніше).
+      </li>
+    </ul>
+    <script>
+      if (confirm("Почати тестування?")) {
+        // Формуємо масив
+        function generateRandomTable(
+          rowsNumber,
+          colsNumber = 7,
+          minValue = 1,
+          maxValue = 500
+        ) {
+          const table = [];
+          for (let rowIndex = 0; rowIndex < rowsNumber; rowIndex++) {
+            table.push([]);
+            for (let colIndex = 0; colIndex < colsNumber; colIndex++) {
+              const randNum =
+                minValue +
+                Math.floor(Math.random() * (maxValue - minValue + 1));
+              table[rowIndex].push(randNum);
+            }
+          }
+          return table;
+        }
+        const numberOfShops = 4 + Math.floor(Math.random() * 7);
+        const profitOfShops = generateRandomTable(numberOfShops);
+        document.write(
+          `Прибуток ${numberOfShops} магазинів - ${JSON.stringify(
+            profitOfShops
+          )}<br><br>`
+        );
+        // 1. загальний прибуток кожного магазину за тиждень;
+        for (let i = 0; i < profitOfShops.length; i++) {
+          const sumOfShop = profitOfShops[i].reduce((sum, el) => sum + el);
+          document.write(
+            `Прибуток магазину ${i + 1} за тиждень - ${sumOfShop}<br>`
+          );
+        }
+        // 2. загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.);
+        const profitByDaysOfAllShops = [0, 0, 0, 0, 0, 0, 0];
+        for (const shop of profitOfShops) {
+          for (let day = 0; day < shop.length; day++) {
+            profitByDaysOfAllShops[day] += shop[day];
+          }
+        }
+        document.write(
+          `Прибуток магазинів по дням: ${profitByDaysOfAllShops}<br>`
+        );
+        // 3. загальний прибуток за робочі дні
+        let sumOfWorkDays = 0;
+        for (const shop of profitOfShops) {
+          sumOfWorkDays += shop.reduce((sum, el, ind) =>
+            ind < 5 ? sum + el : sum
+          );
+        }
+        document.write(
+          `Прибуток магазинів за робочі дні: ${sumOfWorkDays}<br>`
+        );
+        // 4. загальний прибуток за вихідні дні
+        let sumOfWeekendDays = 0;
+        for (const shop of profitOfShops) {
+          sumOfWeekendDays += shop.reduce(
+            (sum, el, ind) => (ind >= 5 ? sum + el : sum),
+            0
+          );
+        }
+        document.write(
+          `Прибуток магазинів за вихідні дні: ${sumOfWeekendDays}<br>`
+        );
+        // 5. максимальний прибуток за середу
+        let maxProfitOfWednesday = 0;
+        for (const shop of profitOfShops) {
+          if (shop.find((el, ind, shop) => ind === 2) > maxProfitOfWednesday)
+            maxProfitOfWednesday = shop.find((el, ind, shop) => ind === 2);
+        }
+        document.write(
+          `Максимальний прибуток засереду: ${maxProfitOfWednesday}<br>`
+        );
+        // 6. сформувати загальний список (одновимірний масив) зі значенням, які що більші за 200
+        const profitLess200 = profitOfShops.flat().filter((el) => el > 200);
+
+        document.write(
+          `Масив зі значеннями, що більше 200: ${profitLess200}<br>`
+        );
+        // 7. відсортувати кожен тиждень за зростанням
+        for (const shop of profitOfShops) {
+          shop.sort((profit1, profit2) => profit1 - profit2);
+        }
+        document.write(
+          `Відсортовано тиждень зазростанням: ${JSON.stringify(
+            profitOfShops
+          )}<br>`
+        );
+        // 8. відсортувати тижні (рядки) за спаданням максимального елементи у
+        // цьому тижні (рядку), тобто при порівнянні рядків потрібно порівнювати
+        // максимальні елементи у кожному з цих рядків
+        profitOfShops.sort(
+          (shop1, shop2) => Math.max(...shop2) - Math.max(...shop1)
+        );
+        document.write(
+          `Відсортовано за спаданням максимального елемента: ${JSON.stringify(
+            profitOfShops
+          )}<br>`
+        );
+        // 9. упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто
+        // при порівнянні двох рядків треба знайти суму кожного з рядків і
+        // порівнювати ці суми, на основі цих сум буде зрозуміло, який з елементів
+        // повинен іти раніше).
+        profitOfShops.sort(
+          (shop1, shop2) =>
+            shop2.reduce((sum, el) => sum + el) -
+            shop1.reduce((sum, el) => sum + el)
+        );
+        document.write(
+          `Відсортовано за спаданням суми за тиждень: ${JSON.stringify(
+            profitOfShops
+          )}<br>`
+        );
+      }
+    </script>
+  </body>
+</html>

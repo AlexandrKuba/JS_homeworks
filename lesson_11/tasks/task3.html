@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>
+      Морський бій. Випадковим чином на двовимірному полі розміром 6*6
+      розташовується 5 кораблів. Користувач стріляє вказуючи координати. Гра
+      продовжується поки не потоплено усі кораблі або у користувача не
+      закінчаться снаряди.
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const field = [];
+        for (let i = 0; i < 6; i++) {
+          field.push(new Array(6));
+        }
+        function rendomPosition() {
+          return 0 + Math.floor(Math.random() * 6);
+        }
+        let ships = 0;
+        while (ships < 6) {
+          let rendomPositionX = rendomPosition();
+          let rendomPositionY = rendomPosition();
+          if (!field[rendomPositionX][rendomPositionY]) {
+            field[rendomPositionX][rendomPositionY] = 1;
+            ships++;
+          }
+        }
+        document.write(`${JSON.stringify(field)}`);
+        let numberOfShells = 6 + Math.floor(Math.random() * 5); //Кількість снарядів
+        alert(`У вас є ${numberOfShells} пострілів, щоб потопити 6 кораблів`);
+        while (ships != 0 && numberOfShells != 0) {
+          const shotX = parseInt(prompt(`Вкажіть рядок пострілу`));
+          const shotY = parseInt(prompt(`Вкажіть стовпчик пострілу`));
+          if (field[shotX][shotY])
+            alert(
+              `Влучили! У вас залишилось ${--numberOfShells} пострілів, а на полі ${--ships} кораблів`
+            );
+          else
+            alert(
+              `Промах! У вас залишилось ${--numberOfShells} пострілів, а на полі ${ships} кораблів`
+            );
+        }
+        alert(`Кількість потоплених кораблів - ${6 - ships} `);
+      }
+    </script>
+  </body>
+</html>
