@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 5</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 5</h1>
+    <p>
+      Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук
+      визначити, чи є у масиві ім’я «Olga» і під яким індексом.
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const arrNames = [
+          "Olga",
+          "Petro",
+          "Nazar",
+          "Vika",
+          "Sashko",
+          "Ivan",
+          "Margo",
+          "Alex",
+          "Roman",
+          "Lena",
+        ];
+        document.write(`Поатковий масив імен - ${arrNames}<br>`);
+        for (let i = 1; i < arrNames.length; i++) {
+          const curName = arrNames[i];
+          let name = i - 1;
+          while (arrNames[name] > curName) {
+            arrNames[name + 1] = arrNames[name];
+            name--;
+          }
+          arrNames[name + 1] = curName;
+        }
+        document.write(
+          `Відсортований масив імен за алфавітом - ${arrNames}<br>`
+        );
+        function getIndexOfName(arr, name) {
+          let left = 0;
+          let right = arr.length - 1;
+          while (left <= right) {
+            const middle = Math.floor((left + right) / 2);
+            if (arr[middle] === name) return middle;
+            else if (arr[middle] < name) left = middle + 1;
+            else if (arr[middle] > name) right = middle - 1;
+          }
+          return -1;
+        }
+        const searchName = "Olga";
+        const searchNameInd = getIndexOfName(arrNames, searchName);
+        if (searchNameInd >= 0)
+          document.write(
+            `Ім\'я ${searchName} під індексом ${searchNameInd}<br>`
+          );
+        else document.write(`Ім\'я ${searchName} в масиві не знайдено`);
+      }
+    </script>
+  </body>
+</html>

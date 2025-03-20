@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Для розглянутих методів сортування спробувати вивести етапи сортування
+      шляхом виведення відповідних таблиць за зразком .
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const arrNum = [];
+        for (let i = 0; i < 30; i++) {
+          arrNum.push(1 + Math.floor(Math.random() * 100));
+        }
+        function bubbleSort(arr) {
+          document.write(`Сортування бульбашкою<br>`);
+          document.write(`${JSON.stringify(arr)}<br>`);
+          let lastNum = arr.length;
+          let chenge;
+          do {
+            chenge = false;
+            for (let i = 0; i < lastNum; i++) {
+              if (arr[i - 1] > arr[i]) {
+                let tmp = arrNum[i - 1];
+                arr[i - 1] = arr[i];
+                arr[i] = tmp;
+                chenge = true;
+                document.write(`${JSON.stringify(arr)}<br>`);
+              }
+            }
+          } while (chenge);
+        }
+        function cocktailSort(arr) {
+          document.write(`Сортуваннязмішуванням<br>`);
+          document.write(`${JSON.stringify(arr)}<br>`);
+          let lastInd = arr.length - 1;
+          let firstInd = 0;
+          while (firstInd < lastInd) {
+            for (let i = firstInd; i < lastInd; i++) {
+              if (arr[i] > arr[i + 1]) {
+                let tmp = arr[i + 1];
+                arr[i + 1] = arr[i];
+                arr[i] = tmp;
+                document.write(`${JSON.stringify(arr)}<br>`);
+              }
+            }
+            lastInd--;
+            for (let i = lastInd; i > firstInd; i--) {
+              if (arr[i] < arr[i - 1]) {
+                let tmp = arr[i - 1];
+                arr[i - 1] = arr[i];
+                arr[i] = tmp;
+                document.write(`${JSON.stringify(arr)}<br>`);
+              }
+            }
+            firstInd++;
+          }
+        }
+        function inclusionSort(arr) {
+          document.write(`Сортування включенням<br>`);
+          document.write(`${JSON.stringify(arr)}<br>`);
+          for (let i = 1; i < arr.length; i++) {
+            const curNum = arr[i];
+            let num = i - 1;
+            while (arr[num] > curNum) {
+              arr[num + 1] = arr[num];
+              num--;
+
+              document.write(`${JSON.stringify(arr)}<br>`);
+            }
+            arr[num + 1] = curNum;
+
+            document.write(`${JSON.stringify(arr)}<br>`);
+          }
+        }
+        inclusionSort(arrNum);
+      }
+    </script>
+  </body>
+</html>

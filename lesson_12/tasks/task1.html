@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>
+      Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та
+      порівнянь чисел під час сортування бульбашкою
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const arrNum = [];
+        for (let i = 0; i < 30; i++) {
+          arrNum.push(1 + Math.floor(Math.random() * 100));
+        }
+        document.write(`${arrNum}<br>`);
+        let lastNum = arrNum.length;
+        let chenge;
+        let chengeNum = 0;
+        let comparisons = 0;
+        do {
+          chenge = false;
+          for (let i = 0; i < lastNum; i++) {
+            comparisons++;
+            if (arrNum[i - 1] > arrNum[i]) {
+              let tmp = arrNum[i - 1];
+              arrNum[i - 1] = arrNum[i];
+              arrNum[i] = tmp;
+              chenge = true;
+              chengeNum++;
+            }
+          }
+        } while (chenge);
+
+        document.write(`${arrNum}<br>`);
+        document.write(`Кількість порівнянь - ${comparisons}<br>`);
+        document.write(`Кількість обмінів - ${chengeNum}`);
+      }
+    </script>
+  </body>
+</html>
