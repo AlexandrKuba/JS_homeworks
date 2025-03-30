@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 0</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 0</h1>
+    <p>
+      Дано два об’єкта. Обидва містять масив цілих чисел. При цьому у одному з
+      них є функція знаходження суми, а у іншому – функція для знаходження
+      добутку тих, які знаходяться між заданими мінімальним і максимальних
+      значенням. Використати обидва методи стосовно обидвох об’єктів
+      (використати call, apply)
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const obj1 = {
+          numbers: [3, 7, 8, 21, 56, 120, 35, 153, 542, 13, 26, 75, 63],
+          getSum(minNum = -Infinity, maxNum = Infinity) {
+            let res;
+            if (this.numbers.find((num) => num > minNum && num < maxNum)) {
+              let sum = 0;
+              for (const number of this.numbers) {
+                if (number > minNum && number < maxNum) sum += number;
+              }
+              res = sum;
+              return res;
+            } else
+              throw new Error("В заданому проміжку немає чисел для підрахунку");
+          },
+        };
+        const obj2 = {
+          numbers: [5, 35, 62, 22, 325, 123, 81, 26, 3, 132, 21, 14, 62, 43],
+          getProduct(minNum = -Infinity, maxNum = Infinity) {
+            let res;
+            if (this.numbers.find((num) => num > minNum && num < maxNum)) {
+              let product = 1;
+              for (const number of this.numbers) {
+                if (number > minNum && number < maxNum) product *= number;
+              }
+              res = product;
+              return res;
+            } else
+              throw new Error("В заданому проміжку немає чисел для підрахунку");
+          },
+        };
+        const minNum = 5,
+          maxNum = 62;
+
+        document.write(
+          `Добуток числе першого об\'єкту з функції другого - ${obj2.getProduct.call(
+            obj1,
+            minNum,
+            maxNum
+          )}<br>`
+        );
+        document.write(
+          `Сума числе другого об\'єкту з функції першого - ${obj1.getSum.call(
+            obj2,
+            minNum,
+            maxNum
+          )}<br>`
+        );
+      }
+    </script>
+  </body>
+</html>

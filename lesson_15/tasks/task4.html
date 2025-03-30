@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Розробити клас Baner Поля Масив об’єктів ( графічних зображень та посилань
+      на сайти) методи Метод випадкового вибору об’єкта (графічного зображення
+      та посилання) Метод виведення випадкового банера
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        class Baner {
+          constructor(arrBaners) {
+            this.baners = arrBaners;
+          }
+          getRendomBaner() {
+            return this.baners[Math.floor(Math.random() * this.baners.length)];
+          }
+          renderRandomBaner() {
+            const currentBaner = this.getRendomBaner();
+            document.write(
+              `<a href='${currentBaner.linkFirBaner}'><img src="${currentBaner.imgForBaner}" alt="car ${currentBaner.title}"></a>`
+            );
+          }
+        }
+        const arrBaners = [
+          {
+            title: "Mercedes",
+            imgForBaner: "../img/mercedes.jpg",
+            linkFirBaner: "https://www.mercedesamgf1.com/",
+          },
+          {
+            title: "Ferrari",
+            imgForBaner: "../img/ferrari.jpg",
+            linkFirBaner: "https://www.ferrari.com/en-EN/formula1",
+          },
+          {
+            title: "Aston Martin",
+            imgForBaner: "../img/astonmartin.jpg",
+            linkFirBaner: "https://www.astonmartinf1.com/en-GB/",
+          },
+          {
+            title: "Red Bull",
+            imgForBaner: "../img/redbull.jpg",
+            linkFirBaner: "https://www.redbull.com/ua-uk/tags/f1",
+          },
+        ];
+        const F1Buner = new Baner(arrBaners);
+
+        console.log(F1Buner.renderRandomBaner());
+      }
+    </script>
+  </body>
+</html>

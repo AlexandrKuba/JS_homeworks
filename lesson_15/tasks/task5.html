@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 5</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 5</h1>
+    <p>
+      Розробити клас «Керівник танців» Поля Масив імен хлопців Масив імен дівчат
+      Методи Метод випадкового вибору імені хлопця Метод випадкового вибору
+      імені дівчини Метод виведення пари для танців Метод run , який ініціює
+      через кожні 5 секунд виведення нової пари для танців
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        class DanceHead {
+          constructor(manList, womanList) {
+            this.mans = manList;
+            this.womans = womanList;
+          }
+          getMan() {
+            return this.mans[Math.floor(Math.random() * this.mans.length)];
+          }
+          getWoman() {
+            return this.womans[Math.floor(Math.random() * this.mans.length)];
+          }
+          getDance() {
+            document.write(`${this.getMan()} танцює з ${this.getWoman()}<br>`);
+          }
+          run() {
+            setInterval(() => {
+              this.getDance();
+            }, 2000);
+          }
+        }
+        const arrMans = ["Ivan", "Petro", "Sashko", "Nazar", "Oleg"];
+        const arrWomans = [
+          "Sveta",
+          "Dasha",
+          "Olga",
+          "Nina",
+          "Lena",
+          "Masha",
+          "Zina",
+        ];
+        const dance = new DanceHead(arrMans, arrWomans);
+        dance.run();
+      }
+    </script>
+  </body>
+</html>

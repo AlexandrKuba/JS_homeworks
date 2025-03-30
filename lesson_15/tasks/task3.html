@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>
+      Розробити клас MultChecker для перевірки таблиці множення Поля Число, яке
+      перевіряємо (наприклад, перевірка частини таблиці множення на 7) Кількість
+      правильних відповідей Кількість неправильних відповідей Методи Генерування
+      прикладу (метод випадковим чином визначає друге число, перше число
+      фіксоване) Перевірка правильності вказаної відповіді render - виведення
+      інформації про тестування на екран
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        class MultChecker {
+          constructor(num) {
+            this.firstNum = num;
+            this.lastSecondNum = 0;
+            this.lastAnswer = 0;
+            this.correctAnswers = 0;
+            this.wrongAnswers = 0;
+          }
+          exampleGeneration() {
+            return (this.lastSecondNum = 1 + Math.floor(Math.random() * 9));
+          }
+          correctnessVerification() {
+            return this.firstNum * this.lastSecondNum === this.lastAnswer
+              ? (this.correctAnswers += 1)
+              : (this.wrongAnswers += 1);
+          }
+          render() {
+            return (this.lastAnswer = parseInt(
+              prompt(`Скільки буде ${this.firstNum}*${this.lastSecondNum}`)
+            ));
+          }
+          run() {
+            this.exampleGeneration();
+            this.render();
+            this.correctnessVerification();
+            if (confirm(`Продовжити тренування?`)) this.run();
+          }
+        }
+        const multiplication7 = new MultChecker(7);
+        console.log(multiplication7);
+        multiplication7.run();
+      }
+    </script>
+  </body>
+</html>
