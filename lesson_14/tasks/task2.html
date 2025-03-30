@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>
+      Розробити функцію, у яку передають об’єкт (день, місяць, рік). Визначити,
+      який буде рік через N місяців.
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const dateForFunc = {
+          day: 28,
+          month: 5,
+          year: 2016,
+        };
+        const N = 15;
+        function whichYearThroughNMonths({ month, year }, N) {
+          return year + Math.floor((month + N) / 12);
+        }
+
+        document.write(
+          `Через ${N} місяців після вказаної дати буде ${whichYearThroughNMonths(
+            dateForFunc,
+            N
+          )} рік`
+        );
+      }
+    </script>
+  </body>
+</html>
