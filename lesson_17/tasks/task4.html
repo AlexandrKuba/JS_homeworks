@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Склад. База товарів, які зберігаються на складі: назва товару, одиниця
+      виміру, кількість, фірма виробник (назва, реєстраційний номер).
+      Організувати реєстрацію/відвантаження товарів, фільтрація за назвою
+      товару, фільтрація за назвою фірми
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        class MyStore {
+          constructor(title) {
+            this.title = title;
+            this.productsList = [];
+          }
+          addProduct(newProduct) {
+            for (const product of this.productsList) {
+              if (product.title === newProduct.title) {
+                product.count += newProduct.count;
+                return;
+              }
+            }
+            this.productsList.push(newProduct);
+          }
+          removeProduct(removeProduct, removeCount) {
+            for (const product of this.productsList) {
+              if (product.title === removeProduct) {
+                if (product.count < removeCount)
+                  alert(
+                    `Продукту ${product.title} на залишки в магазині ${product.count}${product.unitMeasurement}`
+                  );
+                else product.count -= removeCount;
+              }
+            }
+          }
+          filterByTitle(productName) {
+            return this.productsList.filter((el) => el.title === productName);
+          }
+          filterByСompanyTitle(companyName) {
+            return this.productsList.filter(
+              (el) => el.company[0] === companyName
+            );
+          }
+        }
+        class Product {
+          constructor(title, count, unitMeasurement, companyTitle, companyId) {
+            this.title = title;
+            this.count = count;
+            this.unitMeasurement = unitMeasurement;
+            this.company = [companyTitle, companyId];
+          }
+        }
+        const store = new MyStore("Булочна");
+        store.addProduct(new Product("Молоко", 5, "л", "Ферма", "2537"));
+        store.addProduct(new Product("Молоко", 5, "л", "Ферма", "2537"));
+        store.addProduct(new Product("Мука", 25, "кг", "Хуторок", "3648"));
+        store.addProduct(new Product("Творог", 13, "кг", "Ферма", "2537"));
+        store.removeProduct("Молоко", 8);
+        console.log(store.filterByСompanyTitle("Ферма"));
+        console.log(store.filterByTitle("Молоко"));
+        console.log(store);
+      }
+    </script>
+  </body>
+</html>
