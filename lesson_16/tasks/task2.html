@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>
+      Створити клас TMoney для роботи з грошовими сумами. Сума повинна
+      зберігатися у вигляді доларового еквіваленту. Реалізувати методи
+      додавання/вилучення грошової маси, вказуючи необхідну суму у гривнях, та
+      визначення курсу долара, при якому сума у гривнях збільшиться на 100. Курс
+      долара зберігати в окремому полі.
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        class TMoney {
+          #moneyUSD = 0;
+          #grnInUSD = 41.5;
+          constructor(money) {
+            this.MoneyUSD = money;
+          }
+          get GrnInUSD() {
+            return this.#grnInUSD;
+          }
+          get MoneyUSD() {
+            return this.#moneyUSD * this.#grnInUSD;
+          }
+          set MoneyUSD(money) {
+            this.#moneyUSD += money / this.#grnInUSD;
+          }
+          toString() {
+            return `На рахунку ${(this.#moneyUSD * this.#grnInUSD).toFixed(
+              2
+            )} грн (${this.#moneyUSD.toFixed(
+              2
+            )} доларів)<br>Сума на рахунку збільшиться на 100 грн коли долар буде ${this.moneyIncrease100Grn().toFixed(
+              2
+            )}`;
+          }
+          moneyIncrease100Grn() {
+            return (
+              ((Math.abs(this.#moneyUSD) * this.#grnInUSD + 100) *
+                this.#grnInUSD) /
+              (Math.abs(this.#moneyUSD) * this.#grnInUSD)
+            );
+          }
+        }
+        const add100grn = new TMoney(1000);
+        console.log(add100grn);
+        document.write(add100grn);
+      }
+    </script>
+  </body>
+</html>

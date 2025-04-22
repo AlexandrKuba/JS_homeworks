@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Створити клас TBankomat, який моделює роботу банкомата. Клас повинен
+      містити поля для зберігання кількості купюр кожного із номіналів від 5 до
+      200 гривень. Реалізувати методи знаходження максимальної та мінімальної
+      сум, які може видати банкомат, та метод зняття деякої суми.
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        class TBankomat {
+          #par5GRN;
+          #par10GRN;
+          #par20GRN;
+          #par50GRN;
+          #par100GRN;
+          #par200GRN;
+          constructor(par5, par10, par20, par50, par100, par200) {
+            this.Par5GRN = par5;
+            this.Par10GRN = par10;
+            this.Par20GRN = par20;
+            this.Par50GRN = par50;
+            this.Par100GRN = par100;
+            this.Par200GRN = par200;
+          }
+          get Par200GRN() {
+            return this.#par200GRN;
+          }
+          set Par200GRN(numOfPar) {
+            if (numOfPar < 0)
+              throw new Error("Кількість не може бути від'ємною");
+            this.#par200GRN = numOfPar;
+          }
+          get Par100GRN() {
+            return this.#par10GRN;
+          }
+          set Par100GRN(numOfPar) {
+            if (numOfPar < 0)
+              throw new Error("Кількість не може бути від'ємною");
+            this.#par100GRN = numOfPar;
+          }
+          get Par50GRN() {
+            return this.#par50GRN;
+          }
+          set Par50GRN(numOfPar) {
+            if (numOfPar < 0)
+              throw new Error("Кількість не може бути від'ємною");
+            this.#par50GRN = numOfPar;
+          }
+          get Par20GRN() {
+            return this.#par20GRN;
+          }
+          set Par20GRN(numOfPar) {
+            if (numOfPar < 0)
+              throw new Error("Кількість не може бути від'ємною");
+            this.#par20GRN = numOfPar;
+          }
+          get Par10GRN() {
+            return this.#par10GRN;
+          }
+          set Par10GRN(numOfPar) {
+            if (numOfPar < 0)
+              throw new Error("Кількість не може бути від'ємною");
+            this.#par10GRN = numOfPar;
+          }
+          get Par5GRN() {
+            return this.#par5GRN;
+          }
+          set Par5GRN(numOfPar) {
+            if (numOfPar < 0)
+              throw new Error("Кількість не може бути від'ємною");
+            this.#par5GRN = numOfPar;
+          }
+          getMinCashWithdrawal() {
+            let minValue;
+            if (this.#par5GRN) minValue = 5;
+            else if (this.#par10GRN) minValue = 10;
+            else if (this.#par20GRN) minValue = 20;
+            else if (this.#par50GRN) minValue = 50;
+            else if (this.#par100GRN) minValue = 100;
+            else if (this.#par200GRN) minValue = 200;
+            else minValue = 0;
+            return minValue;
+          }
+          getMaxCashWithdrawal() {
+            const maxValue =
+              this.#par5GRN * 5 +
+              this.#par10GRN * 10 +
+              this.#par20GRN * 20 +
+              this.#par50GRN * 50 +
+              this.#par100GRN * 100 +
+              this.#par200GRN * 200;
+            return maxValue;
+          }
+          getCashWithdrawal(amount) {
+            let needToGive = amount;
+            const maxToGive = this.getMaxCashWithdrawal();
+            const minTOGive = this.getMinCashWithdrawal();
+            if (needToGive >= maxToGive)
+              throw new Error(`Максимальна сума для зняття ${maxToGive}`);
+            else if (needToGive % minTOGive !== 0)
+              throw new Error(`Сума має бути кратна ${minTOGive}`);
+            else {
+              if (needToGive >= 200) {
+                const needToGive200 = Math.floor(needToGive / 200);
+                this.Par200GRN -= needToGive200;
+                needToGive -= needToGive200 * 200;
+              }
+              if (needToGive >= 100) {
+                const needToGive100 = Math.floor(needToGive / 100);
+                this.Par100GRN -= needToGive100;
+                needToGive -= needToGive100 * 100;
+              }
+              if (needToGive >= 50) {
+                const needToGive50 = Math.floor(needToGive / 50);
+                this.Par50GRN -= needToGive50;
+                needToGive -= needToGive50 * 50;
+              }
+              if (needToGive >= 20) {
+                const needToGive20 = Math.floor(needToGive / 20);
+                this.Par20GRN -= needToGive20;
+                needToGive -= needToGive20 * 20;
+              }
+              if (needToGive >= 10) {
+                const needToGive10 = Math.floor(needToGive / 10);
+                this.Par10GRN -= needToGive10;
+                needToGive -= needToGive10 * 10;
+              }
+              if (needToGive >= 5) {
+                const needToGive5 = Math.floor(needToGive / 5);
+                this.Par5GRN -= needToGive5;
+                needToGive -= needToGive5 * 5;
+              }
+            }
+          }
+          toString() {
+            return `Мінімальна сума для знатяя - ${this.getMinCashWithdrawal()}грн, а максимальна - ${this.getMaxCashWithdrawal()}грн`;
+          }
+        }
+        const bankomat1 = new TBankomat(20, 20, 20, 20, 20, 20);
+        document.write(bankomat1);
+        console.log(bankomat1);
+        bankomat1.getCashWithdrawal(1295);
+        console.log(bankomat1);
+      }
+    </script>
+  </body>
+</html>

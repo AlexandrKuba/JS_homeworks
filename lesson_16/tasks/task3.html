@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>Об’єкт “Фірма” (використати члени-класи)</p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        class Firm {
+          #title;
+          #year;
+          #month;
+          constructor(title, month, year) {
+            this.Title = title;
+            this.Month = month;
+            this.Year = year;
+            this.services = [];
+            this.branch = [];
+          }
+          get Title() {
+            return this.#title;
+          }
+          get Year() {
+            return this.#year;
+          }
+          get Month() {
+            return this.#month;
+          }
+          set Title(title) {
+            if (!title)
+              throw new Error("Назва компанії не може бути порожньою");
+            this.#title = title;
+          }
+          set Year(year) {
+            if (year >= 2025)
+              throw new Error("Такий рік заснування не може бути");
+            this.#year = year;
+          }
+          set Month(month) {
+            if (month < 0 && month > 13)
+              throw new Error("Такого місяця не існує");
+            this.#month = month;
+          }
+          addServices(servicesTitle, cost, hoursOfExecution) {
+            if (servicesTitle && cost > 0 && hoursOfExecution > 0)
+              this.services.push([servicesTitle, cost, hoursOfExecution]);
+            else throw new Error("Сервіс з такими умовами додати неможливо");
+          }
+          addBranch(country, city, street, houseNumber) {
+            if (country && city && street && houseNumber >= 0)
+              this.branch.push([country, city, street, houseNumber]);
+            else throw new Error("Помилка при введені даних філіалу");
+          }
+          getYearNum() {
+            return 2025 - this.#year;
+          }
+          getBranchInCity(city) {
+            if (!city) throw new Error("Необхідно вказати місто");
+
+            const branchInCity = this.branch.filter(
+              (branch) => branch[1].toLowerCase() === city.toLowerCase()
+            );
+            return branchInCity;
+          }
+          getServices(cost, time) {
+            if (cost <= 0 && time <= 0)
+              throw new Error("Ціна або термін вказані не правильно");
+            return this.services.filter(
+              (service) => service[1] <= cost && service[2] <= time
+            );
+          }
+          toString() {
+            return `Компанії "${this.#title}" заснована у ${this.#year} році.`;
+          }
+        }
+        const newFirm = new Firm(`Machine shop`, 3, 2011);
+        newFirm.addServices("wash", 5000, 5);
+        newFirm.addServices("repair", 25000, 20);
+        newFirm.addServices("parking", 100, 1);
+        newFirm.addBranch("Україна", "Київ", "Перемоги", 5);
+        newFirm.addBranch("Україна", "Миколаїв", "Центральна", 153);
+        newFirm.addBranch("Україна", "Львів", "Межова", 4);
+        console.log(newFirm.getYearNum());
+        console.log(newFirm.getBranchInCity("Київ"));
+        console.log(newFirm.getServices(6000, 4));
+        document.write(newFirm);
+      }
+    </script>
+  </body>
+</html>
