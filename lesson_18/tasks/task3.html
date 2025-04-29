@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>
+      Користувач задає рік народження. Визначити кількість років користувача.
+    </p>
+    <div class="main">
+      <p>Вкажіть ваш рік народження <input type="number" id="year" /></p>
+      <button id="getFullYear" type="button">Порахувати кількість років</button>
+    </div>
+    <script>
+      if (confirm("Почати тестування?")) {
+        document.getElementById("getFullYear").onclick = () => {
+          const yearOfBirth = parseFloat(document.getElementById("year").value);
+          if (isNaN(yearOfBirth)) throw new Error("Вкажіть рік народження");
+          const oldFullYear = document.querySelector(".fullYear");
+          if (oldFullYear)
+            oldFullYear.innerText = `Вам ${2025 - yearOfBirth} повних років`;
+          else {
+            const yearNum = document.createElement("p");
+            yearNum.classList.add("fullYear");
+            yearNum.innerText = `Вам ${2025 - yearOfBirth} повних років`;
+            document.querySelector(".main").append(yearNum);
+          }
+        };
+      }
+    </script>
+  </body>
+</html>

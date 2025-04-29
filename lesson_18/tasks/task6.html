@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 6</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 6</h1>
+    <p>
+      Користувач задає кількість оцінок і натискає на кнопку «get table». В
+      результаті формується таблиця з input, куди користувач вводить оцінки.
+      Після цього натискає на кнопку “get sum” і знаходить середнє значення.
+    </p>
+    <div class="main">
+      <p>Кількість оцінок <input id="marksNum" type="number" value="2" /></p>
+      <button id="getTable" type="button">get table</button>
+    </div>
+    <script>
+      if (confirm("Почати тестування?")) {
+        document.getElementById("getTable").onclick = () => {
+          const marksNum = parseFloat(
+            document.getElementById("marksNum").value
+          );
+          if (document.querySelector(".marksTable"))
+            throw new Error("Таблиця для введення оцінок вже створена");
+          else {
+            if (marksNum < 1) throw new Error("Має бути мінімум 1 оцінка");
+            const table = document.createElement("table");
+            table.classList.add("marksTable");
+            for (let i = 0; i < marksNum; i++) {
+              const tr = document.createElement("tr");
+              const input = document.createElement("input");
+              input.placeholder = `Оцінка ${i + 1}`;
+              input.classList.add("marks");
+              tr.append(input);
+              table.append(tr);
+            }
+            const btnAvg = document.createElement("button");
+            btnAvg.innerText = "get avg";
+            btnAvg.classList.add("getAvg");
+            btnAvg.onclick = getAvg;
+            document.querySelector(".main").append(table);
+            document.querySelector(".main").append(btnAvg);
+          }
+        };
+        function getAvg(params) {
+          const allMarks = document.querySelectorAll(".marks");
+          let sum = 0;
+          for (const inp of allMarks) {
+            const curMark = inp.value;
+            if (!curMark) throw new Error("Заповніть всі оцінки");
+            if (curMark < 1 || curMark > 12)
+              throw new Error("Оцінка має бути в межах від 1 до 12");
+            sum += parseFloat(inp.value);
+          }
+          if (document.querySelector(".avgMarks")) {
+            document.querySelector(".avgMarks").innerText = `Середня оцінка - ${
+              sum / allMarks.length
+            }`;
+          } else {
+            const result = document.createElement("p");
+            result.classList.add("avgMarks");
+            result.innerText = `Середня оцінка - ${sum / allMarks.length}`;
+            document.querySelector(".main").append(result);
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>Зробити конвертер валют (курси валют – константи у скрипті)</p>
+    <div class="main">
+      <p>Сума в гривнях <input id="grn" type="number" value="0" /></p>
+      <button type="button" class="main__button">Конвертувати</button>
+      <p>Сума в євро <input id="euro" type="number" readonly /></p>
+      <p>Сума в доларах <input id="dollar" type="number" readonly /></p>
+    </div>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const courseOfDollars = 41;
+        const courseOfEuro = 45;
+        document.querySelector(".main__button").onclick = () => {
+          const sumGrn = parseFloat(document.getElementById("grn").value);
+          document.getElementById("euro").value = (
+            sumGrn / courseOfEuro
+          ).toFixed(2);
+          document.getElementById("dollar").value = (
+            sumGrn / courseOfDollars
+          ).toFixed(2);
+        };
+      }
+    </script>
+  </body>
+</html>

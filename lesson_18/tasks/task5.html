@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 5</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 5</h1>
+    <p>
+      Відобразити таблицю 3*4 з випадковими числами (її треба динамічно створити
+      і вставити на сторінку)
+    </p>
+    <div class="main"></div>
+    <script>
+      if (confirm("Почати тестування?")) {
+        function getRandomNum(min = 1, max = 1000) {
+          return min + Math.floor(Math.random() * (max - min + 1));
+        }
+        function getTable() {
+          const table = document.createElement("table");
+          for (let i = 0; i < 3; i++) {
+            const tr = document.createElement("tr");
+            for (let k = 0; k < 4; k++) {
+              const td = document.createElement("td");
+              td.innerText = `${getRandomNum()}`;
+              td.style.textAlign = "center";
+              tr.append(td);
+            }
+            table.append(tr);
+          }
+          document.querySelector(".main").append(table);
+        }
+        getTable();
+      }
+    </script>
+  </body>
+</html>

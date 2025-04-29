@@ -1,0 +1,36 @@
+body {
+  background-color: #c0f397;
+}
+body.main ul {
+  border: 2px solid #43f149;
+  padding: 0;
+}
+body.main ul > li:not(:last-child) {
+  border-bottom: 2px solid #43f149;
+}
+ul,
+ol {
+  list-style-type: none;
+}
+li {
+  padding: 5px 10px;
+}
+a {
+  text-decoration: none;
+  color: #220675;
+  transition: color 0.3s;
+}
+a:hover {
+  color: #5c3cbc;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input#result:focus-visible,
+input#euro:focus-visible,
+input#dollar:focus-visible {
+  outline: none;
+}

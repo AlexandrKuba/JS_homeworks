@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 7</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 7</h1>
+    <p>
+      Подорож складається з 3 етапів. На кожному етапі користувач може вибрати
+      один з видів транспорту (авто, автобус, літак - випадаючий список),
+      харчування (сніданок, обід, вечеря – checkbоx) та одного з 3-х
+      гідів(використати - radio buttons). Ціни визначте самі. Підрахувати
+      загальну вартість.
+    </p>
+    <div
+      class="main"
+      style="display: flex; justify-content: space-between"
+    ></div>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const transport = [
+          { title: "cur", cost: 700 },
+          { title: "bus", cost: 450 },
+          { title: "plane", cost: 1200 },
+        ];
+        const food = [
+          { title: "breakfast", cost: 460 },
+          { title: "lunch", cost: 890 },
+          { title: "dinner", cost: 630 },
+        ];
+        const guide = [
+          { name: "Oleg", cost: 500 },
+          { name: "Mari", cost: 700 },
+          { name: "Ivan", cost: 580 },
+        ];
+        class TravelStage {
+          constructor(transport, food, guide, stage) {
+            this.transport = transport;
+            this.food = food;
+            this.guide = guide;
+            this.stage = stage;
+          }
+          renderTransport() {
+            const transportContainer = document.createElement("div");
+            transportContainer.style.display = "flex";
+            transportContainer.style.gap = "10px";
+            const transportTitle = document.createElement("p");
+            transportTitle.innerText = "Оберіть трансопрт";
+            transportTitle.style.margin = "3px 0";
+            const select = document.createElement("select");
+            for (let i = 0; i < this.transport.length; i++) {
+              const optionTransport = document.createElement("option");
+              optionTransport.innerText = `${this.transport[i].title}`;
+              optionTransport.value = `${this.transport[i].cost}`;
+              select.append(optionTransport);
+            }
+            transportContainer.append(transportTitle);
+            transportContainer.append(select);
+            return transportContainer;
+          }
+          renderFood() {
+            const foodList = document.createElement("div");
+            const foodTitle = document.createElement("p");
+            foodTitle.innerText = "Оберіть харчування:";
+            foodList.append(foodTitle);
+            for (let i = 0; i < this.food.length; i++) {
+              const checkboxContainer = document.createElement("div");
+              const inp = document.createElement("input");
+              inp.type = "checkbox";
+              inp.name = "food";
+              inp.value = `${this.food[i].cost}`;
+              const lable = document.createElement("label");
+              lable.innerText = `${this.food[i].title}`;
+              lable.prepend(inp);
+              checkboxContainer.append(lable);
+              foodList.append(checkboxContainer);
+            }
+
+            return foodList;
+          }
+          renderGuide() {
+            const guideList = document.createElement("div");
+            const guideTitle = document.createElement("p");
+            guideTitle.innerText = "Оберіть гіда:";
+            guideList.append(guideTitle);
+            for (let i = 0; i < this.guide.length; i++) {
+              const radioContainer = document.createElement("div");
+              const inp = document.createElement("input");
+              inp.type = "radio";
+              inp.name = `guide${this.stage + 1}`;
+              inp.value = `${this.guide[i].cost}`;
+              const lable = document.createElement("label");
+              lable.innerText = `${this.guide[i].name}`;
+              lable.prepend(inp);
+              radioContainer.append(lable);
+              guideList.append(radioContainer);
+            }
+            return guideList;
+          }
+          render() {
+            const travelStage = document.createElement("div");
+            travelStage.style.width = "30%";
+            const stageTitle = document.createElement("h2");
+            stageTitle.innerText = `Етап №${this.stage + 1}`;
+            const transportList = this.renderTransport();
+            const foodList = this.renderFood();
+            const guideList = this.renderGuide();
+            travelStage.append(stageTitle);
+            travelStage.append(transportList);
+            travelStage.append(foodList);
+            travelStage.append(guideList);
+            document.querySelector(".main").append(travelStage);
+          }
+        }
+        class MyTravel {
+          constructor(stages = 3) {
+            this.stages = stages;
+          }
+          stagesNum() {
+            const title = document.createElement("h1");
+            title.innerText = "Оберіть те, що буде входити до вашого туру";
+            document.querySelector(".main").before(title);
+            for (let i = 0; i < this.stages; i++) {
+              const stage = new TravelStage(transport, food, guide, i);
+              stage.render();
+            }
+            this.totalSumBtn();
+          }
+          totalSumBtn() {
+            const btn = document.createElement("button");
+            btn.innerText = "Отримати загальну суму";
+            btn.onclick = this.getSum;
+            document.querySelector(".main").after(btn);
+          }
+          getSum() {
+            let totalSum = 0;
+            const allTransports = document.querySelectorAll("select");
+            for (const transport of allTransports) {
+              totalSum += parseFloat(transport.value);
+            }
+            const allInps = document.querySelectorAll("input");
+            for (const inp of allInps) {
+              if (inp.checked === true) totalSum += parseFloat(inp.value);
+            }
+            if (document.getElementById("addSum"))
+              document.getElementById("addSum").innerText = `${totalSum}`;
+            else {
+              const addSum = document.createElement("p");
+              addSum.id = "addSum";
+              addSum.innerText = `${totalSum}`;
+              document.querySelector("button").after(addSum);
+            }
+          }
+        }
+        const traval = new MyTravel();
+        traval.stagesNum();
+      }
+    </script>
+  </body>
+</html>
