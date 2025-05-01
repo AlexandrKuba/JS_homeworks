@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Дано 3 таблиці розмірності 3*3 з випадковими числами. Якщо відбувається
+      клік на якійсь із клітинок, то до відповідної таблиці додається червона
+      рамка (спробуйте додати можливість відображення кількості кліків біля
+      назви таблиці з використанням відповідно доданого для цього атрибута).
+    </p>
+    <div class="main"></div>
+    <script>
+      if (confirm("Почати тестування?")) {
+        class Table {
+          constructor() {}
+          random(min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1));
+          }
+          getTitle(numOfTable) {
+            const title = document.createElement("h2");
+            title.innerText = `Таблиця №${numOfTable}`;
+            return title;
+          }
+          getTable() {
+            const table = document.createElement("table");
+            for (let i = 0; i < 3; i++) {
+              table.append(this.getRow());
+            }
+            return table;
+          }
+          getRow() {
+            const tr = document.createElement("tr");
+            for (let i = 0; i < 3; i++) {
+              tr.append(this.getCol());
+            }
+            return tr;
+          }
+          getCol() {
+            const td = document.createElement("td");
+            td.innerText = `${this.random(1, 100)}`;
+            td.onclick = this.getBorder;
+            return td;
+          }
+          getBorder(event) {
+            const parentTable = event.target.closest("table");
+            parentTable.style.border = "2px solid red";
+            if (
+              parentTable.previousElementSibling.classList.contains(
+                "countClick"
+              )
+            ) {
+              parentTable.previousElementSibling.innerText =
+                parseFloat(parentTable.previousElementSibling.innerText) + 1;
+            } else {
+              const clickText = document.createElement("p");
+              clickText.classList.add("countClick");
+              clickText.innerText = `1`;
+              parentTable.before(clickText);
+            }
+          }
+          render() {
+            const selsectContainer = document.querySelector(".main");
+            const container = document.createElement("div");
+            for (let k = 0; k < 3; k++) {
+              const tableContainer = document.createElement("div");
+              tableContainer.append(this.getTitle(k));
+              tableContainer.append(this.getTable());
+              container.append(tableContainer);
+            }
+            container.style.display = "flex";
+            container.style.gap = "20px";
+            if (selsectContainer) selsectContainer.append(container);
+          }
+        }
+        const myTable = new Table();
+        myTable.render();
+      }
+    </script>
+  </body>
+</html>

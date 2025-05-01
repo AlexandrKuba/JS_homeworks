@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>
+      Дано 5 випадковим чином згенерованих нумерованих списків з рандомними
+      числами (кількість елементів у списку випадкова від 1 до 10, елементи
+      випадкові – від 1 до 100). При натисненні на кнопку нумеровані списки з
+      парною кількістю елементів зафарбувати у зелений колір, інші у червоний.
+    </p>
+    <div class="main"></div>
+    <script>
+      if (confirm("Почати тестування?")) {
+        class NumList {
+          constructor(quantityOfLists = 5) {
+            this.quantityOfLists = quantityOfLists;
+          }
+          random(min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1));
+          }
+          createLists(quantityOfLists = 5) {
+            const listsContainer = document.createElement("div");
+            listsContainer.style.display = "flex";
+            for (let j = 0; j < quantityOfLists; j++) {
+              const list = document.createElement("ol");
+              list.classList.add("listNum");
+              const maxQuantityOfEl = this.random(1, 10);
+              for (let i = 0; i < maxQuantityOfEl; i++) {
+                const li = document.createElement("li");
+                li.innerText = `${this.random(1, 100)}`;
+                list.append(li);
+              }
+              listsContainer.append(list);
+            }
+            return listsContainer;
+          }
+          renderBtnForColor() {
+            const btn = document.createElement("button");
+            btn.innerText = "Зафарбувати кольором";
+            btn.onclick = this.getCOlor;
+            return btn;
+          }
+          getCOlor() {
+            const allLists = document.querySelectorAll(".listNum");
+            for (const list of allLists) {
+              if (list.childElementCount % 2 === 0)
+                list.style.backgroundColor = "green";
+              else list.style.backgroundColor = "red";
+            }
+          }
+          render() {
+            const container = document.querySelector(".main");
+            container.append(this.createLists());
+            container.append(this.renderBtnForColor());
+          }
+        }
+        const myList = new NumList();
+        myList.render();
+      }
+    </script>
+  </body>
+</html>

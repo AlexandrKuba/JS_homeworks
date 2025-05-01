@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 5</title>
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      .border {
+        border: 1px solid green;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Задача 5</h1>
+    <p>
+      Відображаємо картки товарів, які користувач може вибирати. Вибраний товар
+      має зелену рамку (при кліку робити toogle з класом вибраного елемента)
+    </p>
+    <div class="main"></div>
+    <script>
+      if (confirm("Почати тестування?")) {
+        class Tovars {
+          constructor(title, description, cost, src) {
+            this.title = title;
+            this.description = description;
+            this.cost = cost;
+            this.src = src;
+          }
+          getTovarCard() {
+            const container = document.createElement("div");
+            container.style.display = "inline-block";
+            container.style.padding = "5px";
+            container.classList.add("tovarCard");
+            const title = document.createElement("h2");
+            title.style.fontSize = "16px";
+            title.innerText = this.title;
+            container.append(title);
+            const image = document.createElement("img");
+            image.src = this.src;
+            image.style.maxWidth = "200px";
+            container.append(image);
+            const description = document.createElement("p");
+            description.innerText = this.description;
+            container.append(description);
+            const cost = document.createElement("p");
+            cost.innerText = this.cost;
+            container.append(cost);
+            container.onclick = this.clickForCard;
+            return container;
+          }
+          clickForCard() {
+            const card = event.target.closest(".tovarCard");
+            console.log(event.target);
+            card.classList.toggle("border");
+          }
+          render() {
+            document.querySelector(".main").append(this.getTovarCard());
+          }
+        }
+        const nout = new Tovars(
+          "Ноутбук Lenovo",
+          "Надпотужний ноутбук",
+          20000,
+          "../img/lenovo.png"
+        );
+        const monitor = new Tovars(
+          "Монітор HP",
+          "Ігровий монітор",
+          7500,
+          "../img/HP.png"
+        );
+        const ps = new Tovars(
+          "PS5",
+          "Ігрова консоль PlayStation 5",
+          27300,
+          "../img/PS5.png"
+        );
+        nout.render();
+        monitor.render();
+        ps.render();
+      }
+    </script>
+  </body>
+</html>
