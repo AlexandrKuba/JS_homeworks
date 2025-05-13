@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>
+      Сяючі зорі. Вказана кількість зірочок повинна з’являтися у випадковій
+      частині екрану. Кожна зірка (це екземпляр класу Star) з певним кроком і
+      інтервалом збільшується від мінімального до максимального розміру. Як
+      тільки досягнути максимального розміру зірочка повинна з’являтися у іншій
+      випадковій позиції.
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        class Star {
+          constructor(minSize, maxSize = 300) {
+            this.minSize = minSize;
+            this.maxSize = maxSize;
+            this.step = this.random();
+          }
+          random(min = 1, max = 100) {
+            return min + Math.floor(Math.random() * (max - min + 1));
+          }
+          createStar() {
+            const myStar = document.createElement("img");
+            myStar.style.position = "absolute";
+            myStar.src = "../img/star.png";
+            return myStar;
+          }
+          setMinWidth() {
+            return (this.$star.style.width = `${this.minSize}px`);
+          }
+          setPosition() {
+            this.$star.style.top = `${this.random()}vh`;
+            this.$star.style.left = `${this.random()}vw`;
+          }
+          newSize() {
+            const curSize = parseFloat(this.$star.style.width);
+            const starNewSize = curSize + this.step;
+            if (starNewSize < this.maxSize) return starNewSize;
+            else {
+              this.setMinWidth();
+              this.setPosition();
+            }
+          }
+          growStar() {
+            const interval = this.random(1, 10);
+            setInterval(() => {
+              this.$star.style.width = `${this.newSize()}px`;
+            }, interval * 100);
+          }
+          render() {
+            const container = document.querySelector("html");
+            container.style.overflow = "hidden";
+            container.style.minHeight = "100vh";
+            const star = this.createStar();
+            this.$star = star;
+            this.setMinWidth();
+            this.setPosition();
+
+            container.append(star);
+            this.growStar();
+          }
+        }
+        class StarSky {
+          constructor(starNum = 5) {
+            this.starNum = starNum;
+          }
+          random(min = 1, max = 100) {
+            return min + Math.floor(Math.random() * (max - min + 1));
+          }
+          render() {
+            for (let i = 0; i < this.starNum; i++) {
+              const star = new Star(this.random());
+              star.render();
+            }
+          }
+        }
+        const s1 = new StarSky();
+        s1.render();
+      }
+    </script>
+  </body>
+</html>
