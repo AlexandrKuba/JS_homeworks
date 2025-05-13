@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 0</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 0</h1>
+    <p>
+      Розробити клас Person (поля:ім`я, вік, адреса; методи: toString,
+      визначення року народження). На основі класу Person розробити клас Worker
+      (додати поля: посада, розмір заробітної плати, кількість відсотів
+      оподаткування; методи:визначення кількості виплачених коштів за рік, та
+      визначення розміру податків)
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        class Person {
+          constructor(name, age, address) {
+            this.name = name;
+            this.age = age;
+            this.address = address;
+          }
+          toString() {
+            return `${this.name}, ${this.age} років, проживає в ${this.address}`;
+          }
+          getYearOfBirth() {
+            const curYear = new Date().getFullYear();
+            return curYear - this.age;
+          }
+        }
+        class Worker extends Person {
+          constructor(name, age, address, position, salary, tax) {
+            super(name, age, address);
+            this.position = position;
+            this.salary = salary;
+            this.tax = tax;
+          }
+          salaryOnYear() {
+            return this.salary * 12;
+          }
+          taxInGrn() {
+            return (this.salary * this.tax) / 100;
+          }
+          toString() {
+            return (
+              `${super.toString()}. ` +
+              `Річна заробітня плата складає ${this.salaryOnYear()} грн, а також щомісяця сплачує ${this.taxInGrn()} грн податків`
+            );
+          }
+        }
+        const p1 = new Worker("Vlad", 31, "Ukrain", "Manager", 20000, 20);
+        document.write(p1);
+      }
+    </script>
+  </body>
+</html>

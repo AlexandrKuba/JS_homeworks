@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Користувач задає місяць навчання учня (перевіряти чи є числом, чи від 1 до
+      12, чи не канікули) та оцінку (перевіряти чи є числом, чи від 1 до 100).
+      Вивести чи зможе він виправити оцінку (якщо оцінка погана і це не останній
+      місяць у семестрі) . Обробку усіх помилок зробити з використанням
+      відповідних класів.
+    </p>
+    <div class="main"></div>
+    <script>
+      if (confirm("Почати тестування?")) {
+        class Education {
+          constructor(notBadMark = 50) {
+            this.notBadMark = notBadMark;
+          }
+          doInp() {
+            const container = document.createElement("div");
+            for (let i = 0; i < 2; i++) {
+              const inpContainer = document.createElement("div");
+              const title = document.createElement("h5");
+              const inp = document.createElement("input");
+              if (i === 0) {
+                title.innerText = "Номер місяця";
+                title.classList.add("titleMonth");
+                inp.id = "inpMonth";
+                inp.placeholder = "Введіть місяць";
+              } else {
+                title.innerText = "Оцінка учня";
+                title.classList.add("titleInp");
+                inp.id = "inpMark";
+                inp.placeholder = "Введіть бал";
+              }
+              inpContainer.append(title);
+              inpContainer.append(inp);
+              container.append(inpContainer);
+            }
+            return container;
+          }
+          btnResult() {
+            const btn = document.createElement("button");
+            btn.innerText = "Розрахувати";
+            btn.style.marginTop = "20px";
+            btn.onclick = this.getAnswer;
+            return btn;
+          }
+          doWindowRes() {
+            const res = document.createElement("p");
+            res.id = "resultOfChangeMark";
+            document.querySelector(".main").append(res);
+            this.$windowRes = res;
+            return res;
+          }
+          getAnswer() {
+            const resWindow = document.querySelector("#resultOfChangeMark");
+            try {
+              const markValue = parseFloat(
+                document.querySelector("#inpMark").value
+              );
+              const monthValue = parseFloat(
+                document.querySelector("#inpMonth").value
+              );
+              if (isNaN(monthValue) || isNaN(markValue))
+                throw new Error("Номер та оцінка мають бути ислом");
+              else if (monthValue < 1 || monthValue > 12)
+                throw new Error("Місяць має бути від 1 до 12");
+              else if (monthValue >= 6 && monthValue <= 8)
+                throw new Error(
+                  "Влітку учень не отримував оцінки, оберіть інший місяць"
+                );
+              else if (markValue < 1 || markValue > 100)
+                throw new Error("Оцінка має бути від 1 до 100");
+              let res;
+              if (monthValue === 5 || monthValue === 12)
+                throw new Error(
+                  "Нажаль, залишилось мало часу до кінця семестру і оцінку не змінити"
+                );
+              else if (markValue < this.notBadMark)
+                throw new Error("Оцінка не потребує корегування");
+              resWindow.innerText = "Оцінку можливо змінити";
+            } catch (error) {
+              resWindow.innerText = error.message;
+            }
+          }
+          render() {
+            const selectorContainer = document.querySelector(".main");
+            selectorContainer.append(this.doInp());
+            selectorContainer.append(this.btnResult());
+            this.doWindowRes();
+          }
+        }
+        const s1 = new Education();
+        s1.render();
+      }
+    </script>
+  </body>
+</html>

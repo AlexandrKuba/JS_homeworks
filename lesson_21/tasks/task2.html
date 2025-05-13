@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>
+      Створити клас Bank, у якому зберігається масив клієнтів. Виконати такі
+      операції
+    </p>
+    <ul>
+      <li>● Вивести всіх простих клієнтів;</li>
+      <li>● Вивести всіх клієнтів GoldenClient;</li>
+      <li>● Знайти сумарну кількість грошей на рахунку;</li>
+    </ul>
+    <script>
+      if (confirm("Почати тестування?")) {
+        class Client {
+          #clientID;
+          #name;
+          constructor(clientID, name) {
+            this.ClientID = clientID;
+            this.Name = name;
+            this.mony = 0;
+          }
+          get ClientID() {
+            return this.#clientID;
+          }
+          get Name() {
+            return this.#name;
+          }
+          set ClientID(clientID) {
+            if (this.#clientID) throw new Error("Редагування id неможиве");
+            this.#clientID = clientID;
+          }
+          set Name(name) {
+            if (!name) throw new Error("Ім'я не може бути порожнім");
+            this.#name = name;
+          }
+          addMony(mony) {
+            if (mony < 0)
+              throw new Error("Неможливо додати до рахунку від'ємну суму");
+            this.mony += mony;
+          }
+          removingMony(mony) {
+            if (this.mony - mony < 0)
+              throw new Error("Недостатньо коштів на рахунку");
+            this.mony = this.mony - Math.abs(mony);
+          }
+          toString() {
+            return `На рахунку у ${this.#name} ${this.mony} грн`;
+          }
+        }
+        class GoldenClient extends Client {
+          #creditLimit;
+          #creditTax;
+          constructor(clientID, name, creditLimit, creditTax) {
+            super(clientID, name);
+            this.CreditLimit = creditLimit;
+            this.CreditTax = creditTax;
+          }
+          get CreditLimit() {
+            return this.#creditLimit;
+          }
+          get CreditTax() {
+            return this.#creditTax;
+          }
+          set CreditLimit(creditLimit) {
+            if (creditLimit < 0)
+              throw new Error("Кредитний ліміт не може бути від'ємним");
+            this.#creditLimit = creditLimit;
+          }
+          set CreditTax(creditTax) {
+            if (creditTax < 0)
+              throw new Error("Кредитна ставка не може бути від'ємною");
+            this.#creditTax = creditTax;
+          }
+          removingMony(mony) {
+            const totalOnCard = this.mony + this.#creditLimit;
+            if (totalOnCard - Math.abs(mony) < 0)
+              throw new Error("Недостатньо коштів на рахунку");
+            this.mony -= Math.abs(mony);
+          }
+          getTax() {
+            let res;
+            if (this.mony > 0) res = 0;
+            else {
+              res =
+                ((this.#creditLimit - Math.abs(this.mony)) * this.#creditTax) /
+                100;
+            }
+            return res;
+          }
+          toString() {
+            return `${super.toString()}. Кредитний ліміт - ${
+              this.#creditLimit
+            }, поточний місячний платіж за користування кредитними коштами складає ${this.getTax()} грн`;
+          }
+        }
+
+        class Bank {
+          constructor(arr) {
+            this.arrListOfClients = arr;
+          }
+          getSimpleСlient() {
+            return this.arrListOfClients.filter(
+              (client) => !("CreditLimit" in client)
+            );
+          }
+          getGoldenClients() {
+            return this.arrListOfClients.filter(
+              (client) => "CreditLimit" in client
+            );
+          }
+          getTotalClientsMony() {
+            return this.arrListOfClients.reduce(
+              (prevSum, el) => prevSum + el.mony,
+              0
+            );
+          }
+        }
+        const client1 = new GoldenClient(23, "Inna", 15000, 15);
+        const client2 = new GoldenClient(2334, "Ivan", 30000, 12);
+        const client3 = new Client(2334, "Ivan");
+        client1.addMony(5000);
+        client2.removingMony(-10000);
+        client3.addMony(17500);
+        const bankListOfClients = [client1, client2, client3];
+        const myBank = new Bank(bankListOfClients);
+        console.log(myBank.getGoldenClients());
+        console.log(myBank.getSimpleСlient());
+        console.log(myBank.getTotalClientsMony());
+      }
+    </script>
+  </body>
+</html>

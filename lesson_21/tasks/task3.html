@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>
+      Розробити Класи House, Dog, Bird. Подумайте яким має бути спільний клас
+      предок.
+    </p>
+    <div class="main"></div>
+    <script>
+      if (confirm("Почати тестування?")) {
+        class Ancestor {
+          constructor(posX, posY, url, interval = 3) {
+            this.posX = posX;
+            this.posY = posY;
+            this.url = url;
+            this.interval = interval;
+          }
+          random(min = 1, max = 100) {
+            return min + Math.floor(Math.random() * (max - min + 1));
+          }
+          setImg() {
+            const image = document.createElement("img");
+            image.src = this.url;
+            image.style.maxWidth = "200px";
+            return image;
+          }
+          setPosition(top = this.random(), left = this.random()) {
+            this.$myObj.style.top = top + "%";
+            this.$myObj.style.left = left + "%";
+          }
+          render() {
+            const container = document.createElement("div");
+            this.$myObj = container;
+            container.style.position = "absolute";
+            container.append(this.setImg());
+            this.setPosition();
+            document.querySelector(".main").append(container);
+            return container;
+          }
+        }
+        class House extends Ancestor {
+          constructor(posX, posY, url, interval) {
+            super(posX, posY, url, interval);
+            this.scale;
+          }
+          setScale() {
+            this.scale = this.random(1, 200) / 100;
+            this.$myObj.style.transform = `scale(${this.scale})`;
+          }
+          render() {
+            super.render();
+            setInterval(() => {
+              this.setScale();
+            }, this.interval * 1000);
+          }
+        }
+        class Dog extends Ancestor {
+          constructor(posX, posY, url, interval) {
+            super(posX, posY, url, interval);
+            this.top;
+          }
+          moveX() {
+            this.setPosition(parseFloat(this.$myObj.style.top));
+          }
+          render() {
+            super.render();
+            setInterval(() => {
+              this.moveX();
+            }, this.interval * 1000);
+          }
+        }
+        class Bird extends Ancestor {
+          constructor(posX, posY, url, interval) {
+            super(posX, posY, url, interval);
+            this.top;
+          }
+          move() {
+            this.setPosition();
+          }
+          render() {
+            super.render();
+            setInterval(() => {
+              this.move();
+            }, this.interval * 1000);
+          }
+        }
+
+        const house = new House(50, 50, "../img/house.png");
+        const dog = new Dog(50, 50, "../img/dog.png");
+        const bird = new Bird(50, 50, "../img/bird.png");
+        house.render();
+        dog.render();
+        bird.render();
+      }
+    </script>
+  </body>
+</html>
