@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>
+      Зберігати у пам’яті список справ, які користувачу треба виконати
+      (зберігати у localStorage). Періодично випадковим чином вибирати якусь з
+      справ і виводити користувачу (з використанням confirm). Якщо користувач
+      натискає на «Ок», то видаляти цю задачу.
+    </p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const toDoList = [
+          "Зробити ДЗ",
+          "Погуляти з собакою",
+          "Сходити в магазин",
+          "Відпочити",
+          "Поїсти",
+        ];
+        localStorage.setItem("To do", JSON.stringify(toDoList));
+        function random(min = 1, max = 100) {
+          return min + Math.floor(Math.random() * (max - min + 1));
+        }
+        function timer(min = 1, max = 10) {
+          if (localStorage.getItem("To do"))
+            setTimeout(() => {
+              getToDo();
+            }, random(min, max) * 1000);
+        }
+        function getToDo() {
+          const myToDo = JSON.parse(localStorage.getItem("To do"));
+          const randomToDo = random(0, myToDo.length - 1);
+          if (confirm(myToDo[randomToDo])) {
+            myToDo.splice(randomToDo, 1);
+            myToDo.length === 0
+              ? localStorage.removeItem("To do")
+              : localStorage.setItem("To do", JSON.stringify(myToDo));
+          }
+          timer();
+        }
+        window.onload = () => {
+          timer(1, 5);
+        };
+      }
+    </script>
+  </body>
+</html>

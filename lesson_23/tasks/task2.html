@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>
+      Користувач може змінювати колір фону. Зберігати цей колір і відновлювати
+      при наступному відкритті. Також зберігати і відображати кількість змін
+      протягом одного сеансу.
+    </p>
+    <input type="color" class="inpColor" />
+    <p>Кількість змін кольору <span id="changeBgColor"></span></p>
+    <script>
+      if (confirm("Почати тестування?")) {
+        const inpChangeBgColor = document.querySelector(".inpColor");
+        const bgContainer = document.querySelector("body");
+        const chengeNumContainer = document.querySelector("#changeBgColor");
+        inpChangeBgColor.onchange = changeBgColor;
+        function changeBgColor() {
+          localStorage.setItem("color", inpChangeBgColor.value);
+          bgContainer.style.backgroundColor = inpChangeBgColor.value;
+          if (localStorage.getItem("bgChangeNum"))
+            localStorage.bgChangeNum =
+              parseInt(localStorage.getItem("bgChangeNum")) + 1;
+          else localStorage.setItem("bgChangeNum", 1);
+          chengeNumContainer.innerText = localStorage.getItem("bgChangeNum");
+        }
+
+        window.onload = () => {
+          bgContainer.style.backgroundColor = localStorage.getItem("color");
+          if (localStorage.getItem("bgChangeNum"))
+            chengeNumContainer.innerText = localStorage.getItem("bgChangeNum");
+          else chengeNumContainer.innerText = 0;
+        };
+      }
+    </script>
+  </body>
+</html>
